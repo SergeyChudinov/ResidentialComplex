@@ -9,6 +9,10 @@
   max-width: 1200px;
 }
 
+body {
+  background-color: rgb(255, 255, 255);
+}
+
 header {
   display: flex;
   flex-direction: column;
@@ -25,7 +29,7 @@ header .header_img {
 }
 header .header_top {
   height: 100px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 10;
 }
 header .header_top .header_container {
@@ -33,7 +37,7 @@ header .header_top .header_container {
   justify-content: space-between;
 }
 header .header_top .header_container .logo {
-  width: 130px;
+  height: 80px;
   margin-left: 20px;
 }
 header .header_top .header_container nav {
@@ -50,7 +54,8 @@ header .header_top .header_container nav ul li {
 }
 header .header_top .header_container nav ul li a {
   text-decoration: none;
-  color: black;
+  color: rgb(255, 255, 255);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 header .header_top .header_container nav ul li:last-child {
   margin-right: 0;
@@ -63,9 +68,12 @@ header .header_top .header_container .phone_container {
 header .header_top .header_container .phone_container .phone {
   width: 25px;
   height: 25px;
+  color: #fff;
 }
 header .header_top .header_container .phone_container .phone_number {
   margin-left: 10px;
+  color: rgb(255, 255, 255);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 header .header_bottom {
   display: flex;
@@ -114,6 +122,9 @@ main .photo_gallery .photo_gallery_container .photo_gallery_img {
 main .photo_gallery .photo_gallery_container .photo_gallery_img:hover {
   transform: scale(1.2);
 }
+main .apartment_selection {
+  margin: 100px auto;
+}
 main .apartment_selection .apartment_selection_title {
   display: flex;
   justify-content: center;
@@ -127,16 +138,21 @@ main .apartment_selection .apartment_filter {
   justify-content: center;
 }
 main .apartment_selection .apartment_filter .apartment_filter_container {
-  width: 50%;
+  width: 600px;
   display: flex;
   justify-content: space-between;
 }
 main .apartment_selection .apartment_filter .apartment_filter_container .filter_button {
+  font-family: cursive;
   background-color: #fff;
   padding: 5px;
-  border: 1px solid rgb(115, 111, 111);
+  border: 1px solid rgb(217, 215, 215);
   border-radius: 5px;
+  transition: all 0.5s;
   cursor: pointer;
+}
+main .apartment_selection .apartment_filter .apartment_filter_container .filter_button:hover {
+  transform: scale(1.2);
 }
 main .apartment_selection .apartment_selection_container {
   margin: 50px auto;
@@ -144,6 +160,8 @@ main .apartment_selection .apartment_selection_container {
   flex-wrap: wrap;
 }
 main .apartment_selection .apartment_selection_container .apartment_block {
+  border: 1px solid rgb(217, 215, 215);
+  border-radius: 5px;
   box-sizing: border-box;
   width: 12.5%;
   height: 200px;
@@ -157,11 +175,72 @@ main .apartment_selection .apartment_selection_container .apartment_block {
 main .apartment_selection .apartment_selection_container .apartment_block .apartment_img {
   padding: 5px;
   width: 90%;
-  height: 90%;
+  height: 70%;
+}
+main .apartment_selection .apartment_selection_container .apartment_block .apartment_title {
+  font-size: 15px;
+  text-align: center;
+  font-family: cursive;
+}
+main .apartment_selection .apartment_selection_container .apartment_block .apartment_text {
+  font-size: 12px;
+  color: rgb(99, 105, 105);
+  text-align: center;
+  font-family: cursive;
 }
 main .apartment_selection .apartment_selection_container .apartment_block:nth-child(6n) {
   margin-right: 0;
 }
 main .apartment_selection .apartment_selection_container .apartment_block:hover {
-  transform: scale(2);
+  transform: scale(2.5);
+}
+main .contacts .contacts_title {
+  display: flex;
+  justify-content: center;
+}
+main .contacts .office_container {
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid rgb(217, 215, 215);
+  border-radius: 5px;
+}
+main .contacts .office_container .office_title {
+  margin-bottom: 15px;
+}
+main .contacts .office_container .office_block {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+main .contacts .office_container .office_block .info_container .info_title {
+  font-size: 17px;
+}
+main .contacts .office_container .office_block .info_container .info_text {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+main .contacts .contacts_title {
+  margin: 50px auto;
+}
+main .contacts .contacts_text {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  font-size: 17px;
+}
+main .contacts .map .map_iframe {
+  width: 100%;
+  height: 600px;
+}
+
+.pageup {
+  width: 26px;
+  height: 26px;
+  position: fixed;
+  bottom: 100px;
+  right: 5%;
+  z-index: 30;
+  background-color: #fff;
+  cursor: pointer;
+  border: 1px solid white;
+  transition: 1s all;
 }/*# sourceMappingURL=style.css.map */
