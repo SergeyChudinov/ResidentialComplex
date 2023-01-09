@@ -1,0 +1,377 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+body {
+  background-color: rgb(255, 255, 255);
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
+}
+header .header_img {
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  position: absolute;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+header .header_top {
+  height: 100px;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10;
+}
+header .header_top .header_container {
+  display: flex;
+  justify-content: space-between;
+}
+header .header_top .header_container .logo {
+  height: 80px;
+  margin-left: 20px;
+}
+header .header_top .header_container nav {
+  display: flex;
+  align-items: center;
+}
+header .header_top .header_container nav ul {
+  display: flex;
+  justify-content: space-between;
+}
+header .header_top .header_container nav ul li {
+  margin-right: 10px;
+  list-style-type: none;
+}
+header .header_top .header_container nav ul li a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+header .header_top .header_container nav ul li:last-child {
+  margin-right: 0;
+}
+header .header_top .header_container .phone {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+}
+header .header_top .header_container .phone .phone_container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 20px;
+}
+header .header_top .header_container .phone .phone_container .phone_img {
+  width: 25px;
+  height: 25px;
+  color: #fff;
+}
+header .header_top .header_container .phone .phone_container .phone_number {
+  margin-left: 10px;
+  color: rgb(255, 255, 255);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+header .header_top .header_container .phone .call_back {
+  color: rgb(150, 144, 144);
+}
+header .header_bottom {
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+}
+header .header_bottom .header_container {
+  display: flex;
+  align-items: center;
+}
+header .header_bottom .header_container .header_inline-block {
+  display: inline-block;
+}
+header .header_bottom .header_container .header_inline-block .header__subtitle {
+  color: white;
+}
+header .header_bottom .header_container .header_inline-block .header__title {
+  color: white;
+  text-align: center;
+}
+
+main .photo_gallery {
+  margin: 100px auto;
+}
+main .photo_gallery .photo_gallery_title {
+  display: flex;
+  justify-content: center;
+}
+main .photo_gallery .photo_gallery_text {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+main .photo_gallery .photo_gallery_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+main .photo_gallery .photo_gallery_container .photo_gallery_img {
+  width: 32%;
+  margin: 10px 0;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+main .photo_gallery .photo_gallery_container .photo_gallery_img:hover {
+  transform: scale(1.2);
+}
+main .apartment_selection {
+  margin: 100px auto;
+}
+main .apartment_selection .apartment_selection_title {
+  display: flex;
+  justify-content: center;
+}
+main .apartment_selection .apartment_selection_text {
+  margin-top: 25px;
+}
+main .apartment_selection .apartment_filter {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+}
+main .apartment_selection .apartment_filter .apartment_filter_container {
+  width: 600px;
+  display: flex;
+  justify-content: space-between;
+}
+main .apartment_selection .apartment_filter .apartment_filter_container .filter_button {
+  font-family: cursive;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid rgb(217, 215, 215);
+  border-radius: 5px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+main .apartment_selection .apartment_filter .apartment_filter_container .filter_button:hover {
+  transform: scale(1.2);
+}
+main .apartment_selection .apartment_selection_container {
+  margin: 50px auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+main .apartment_selection .apartment_selection_container .apartment_block {
+  border: 1px solid rgb(217, 215, 215);
+  border-radius: 5px;
+  box-sizing: border-box;
+  width: 12.5%;
+  height: 200px;
+  margin-right: 5%;
+  margin-top: 20px;
+  background-color: #fff;
+  box-shadow: 17px 17px 16px 4px rgba(34, 60, 80, 0.2);
+  transition: all 0.5s;
+  cursor: pointer;
+}
+main .apartment_selection .apartment_selection_container .apartment_block .apartment_img {
+  padding: 5px;
+  width: 90%;
+  height: 70%;
+}
+main .apartment_selection .apartment_selection_container .apartment_block .apartment_title {
+  font-size: 15px;
+  text-align: center;
+  font-family: cursive;
+}
+main .apartment_selection .apartment_selection_container .apartment_block .apartment_text {
+  font-size: 12px;
+  color: rgb(99, 105, 105);
+  text-align: center;
+  font-family: cursive;
+}
+main .apartment_selection .apartment_selection_container .apartment_block:nth-child(6n) {
+  margin-right: 0;
+}
+main .apartment_selection .apartment_selection_container .apartment_block:hover {
+  transform: scale(2.5);
+}
+main .contacts .contacts_title {
+  display: flex;
+  justify-content: center;
+}
+main .contacts .office_container {
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid rgb(217, 215, 215);
+  border-radius: 5px;
+}
+main .contacts .office_container .office_title {
+  margin-bottom: 15px;
+}
+main .contacts .office_container .office_block {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+main .contacts .office_container .office_block .info_container .info_title {
+  font-size: 17px;
+}
+main .contacts .office_container .office_block .info_container .info_text {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+main .contacts .contacts_title {
+  margin: 50px auto;
+}
+main .contacts .contacts_text {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  font-size: 17px;
+}
+main .contacts .map .map_iframe {
+  width: 100%;
+  height: 600px;
+}
+
+.pageup {
+  display: none;
+  width: 26px;
+  height: 26px;
+  position: fixed;
+  bottom: 100px;
+  right: 5%;
+  z-index: 30;
+  background-color: #fff;
+  cursor: pointer;
+  border: 1px solid white;
+  transition: 1s all;
+}
+
+.modal {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(115, 115, 115, 0.8);
+}
+.modal .modal_block {
+  position: relative;
+}
+.modal .modal_block .close_modal {
+  display: flex;
+  position: absolute;
+  top: -25px;
+  right: -50px;
+  z-index: 10;
+  font-size: 3rem;
+  line-height: 5rem;
+  text-align: center;
+  background: transparent;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+.modal .modal_block .form_container {
+  padding: 40px;
+  width: 350px;
+  height: 420px;
+  background-color: #ffffff;
+  position: relative;
+}
+.modal .modal_block .form_container .form_title {
+  display: flex;
+  justify-content: center;
+}
+.modal .modal_block .form_container .form_input {
+  border: 1px solid rgba(41, 41, 41, 0.25);
+  border-radius: 10px;
+  width: 100%;
+  height: 60px;
+  margin-top: 15px;
+  font-style: italic;
+  text-align: center;
+}
+.modal .modal_block .form_container .form_input::-moz-placeholder {
+  color: rgb(146, 135, 135);
+  font-size: 1.2em;
+  font-style: italic;
+  text-align: center;
+}
+.modal .modal_block .form_container .form_input:-ms-input-placeholder {
+  color: rgb(146, 135, 135);
+  font-size: 1.2em;
+  font-style: italic;
+  text-align: center;
+}
+.modal .modal_block .form_container .form_input::placeholder {
+  color: rgb(146, 135, 135);
+  font-size: 1.2em;
+  font-style: italic;
+  text-align: center;
+}
+.modal .modal_block .form_container .form_textarea {
+  border: 1px solid rgba(41, 41, 41, 0.25);
+  border-radius: 10px;
+  height: 60px;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-top: 20px;
+  font-style: italic;
+  resize: none;
+  text-align: center;
+}
+.modal .modal_block .form_container .form_textarea::-moz-placeholder {
+  color: rgb(146, 135, 135);
+  font-size: 1.2em;
+  font-style: italic;
+  text-align: center;
+}
+.modal .modal_block .form_container .form_textarea:-ms-input-placeholder {
+  color: rgb(146, 135, 135);
+  font-size: 1.2em;
+  font-style: italic;
+  text-align: center;
+}
+.modal .modal_block .form_container .form_textarea::placeholder {
+  color: rgb(146, 135, 135);
+  font-size: 1.2em;
+  font-style: italic;
+  text-align: center;
+}
+.modal .modal_block .form_container .form_button {
+  width: 100%;
+  height: 60px;
+  border: 1px solid rgba(41, 41, 41, 0.16);
+  border-radius: 10px;
+  background: linear-gradient(180deg, #ffed26 0%, #ffb400 100%);
+}
+.modal .modal_block .form_container .form_notice {
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+}
+.modal .modal_block .form_container .status {
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  color: red;
+}/*# sourceMappingURL=style.css.map */
