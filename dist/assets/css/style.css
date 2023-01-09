@@ -60,20 +60,30 @@ header .header_top .header_container nav ul li a {
 header .header_top .header_container nav ul li:last-child {
   margin-right: 0;
 }
-header .header_top .header_container .phone_container {
+header .header_top .header_container .phone {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+}
+header .header_top .header_container .phone .phone_container {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   margin-right: 20px;
 }
-header .header_top .header_container .phone_container .phone {
+header .header_top .header_container .phone .phone_container .phone_img {
   width: 25px;
   height: 25px;
   color: #fff;
 }
-header .header_top .header_container .phone_container .phone_number {
+header .header_top .header_container .phone .phone_container .phone_number {
   margin-left: 10px;
   color: rgb(255, 255, 255);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+header .header_top .header_container .phone .call_back {
+  color: rgb(150, 144, 144);
 }
 header .header_bottom {
   display: flex;
@@ -233,6 +243,7 @@ main .contacts .map .map_iframe {
 }
 
 .pageup {
+  display: none;
   width: 26px;
   height: 26px;
   position: fixed;
@@ -243,4 +254,124 @@ main .contacts .map .map_iframe {
   cursor: pointer;
   border: 1px solid white;
   transition: 1s all;
+}
+
+.modal {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(115, 115, 115, 0.8);
+}
+.modal .modal_block {
+  position: relative;
+}
+.modal .modal_block .close_modal {
+  display: flex;
+  position: absolute;
+  top: -25px;
+  right: -50px;
+  z-index: 10;
+  font-size: 3rem;
+  line-height: 5rem;
+  text-align: center;
+  background: transparent;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+.modal .modal_block .form_container {
+  padding: 40px;
+  width: 350px;
+  height: 420px;
+  background-color: #ffffff;
+  position: relative;
+}
+.modal .modal_block .form_container .form_title {
+  display: flex;
+  justify-content: center;
+}
+.modal .modal_block .form_container .form_input {
+  border: 1px solid rgba(41, 41, 41, 0.25);
+  border-radius: 10px;
+  width: 100%;
+  height: 60px;
+  margin-top: 15px;
+  font-style: italic;
+  text-align: center;
+}
+.modal .modal_block .form_container .form_input::-moz-placeholder {
+  color: rgb(146, 135, 135);
+  font-size: 1.2em;
+  font-style: italic;
+  text-align: center;
+}
+.modal .modal_block .form_container .form_input:-ms-input-placeholder {
+  color: rgb(146, 135, 135);
+  font-size: 1.2em;
+  font-style: italic;
+  text-align: center;
+}
+.modal .modal_block .form_container .form_input::placeholder {
+  color: rgb(146, 135, 135);
+  font-size: 1.2em;
+  font-style: italic;
+  text-align: center;
+}
+.modal .modal_block .form_container .form_textarea {
+  border: 1px solid rgba(41, 41, 41, 0.25);
+  border-radius: 10px;
+  height: 60px;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-top: 20px;
+  font-style: italic;
+  resize: none;
+  text-align: center;
+}
+.modal .modal_block .form_container .form_textarea::-moz-placeholder {
+  color: rgb(146, 135, 135);
+  font-size: 1.2em;
+  font-style: italic;
+  text-align: center;
+}
+.modal .modal_block .form_container .form_textarea:-ms-input-placeholder {
+  color: rgb(146, 135, 135);
+  font-size: 1.2em;
+  font-style: italic;
+  text-align: center;
+}
+.modal .modal_block .form_container .form_textarea::placeholder {
+  color: rgb(146, 135, 135);
+  font-size: 1.2em;
+  font-style: italic;
+  text-align: center;
+}
+.modal .modal_block .form_container .form_button {
+  width: 100%;
+  height: 60px;
+  border: 1px solid rgba(41, 41, 41, 0.16);
+  border-radius: 10px;
+  background: linear-gradient(180deg, #ffed26 0%, #ffb400 100%);
+}
+.modal .modal_block .form_container .form_notice {
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+}
+.modal .modal_block .form_container .status {
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  color: red;
 }/*# sourceMappingURL=style.css.map */
