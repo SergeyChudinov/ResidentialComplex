@@ -38,6 +38,9 @@
                 <div class="header_inline-block">
                     <h1 class="header__subtitle">ЖИЛОЙ КОМПЛЕКС</h1>
                     <h1 class="header__title">NATIVE</h1>
+                    <div class="header_button">
+                        <button class="modal_calc_btn">ПОДОБРАТЬ КВАРТИРУ</button>
+                    </div>
                 </div>
                 
             </div>
@@ -88,21 +91,6 @@
                     <h1 class="apartment_title">Студия</h1>
                     <p class="apartment_text">Площадь — 57,4 м²</p>
                 </div>
-                <div class="apartment_block">
-                    <img class="apartment_img" src="./assets/img/studio_apartment_4.png" alt="apartment">
-                    <h1 class="apartment_title">Студия</h1>
-                    <p class="apartment_text">Площадь — 57,4 м²</p>
-                </div>
-                <div class="apartment_block">
-                    <img class="apartment_img" src="./assets/img/studio_apartment_5.png" alt="apartment">
-                    <h1 class="apartment_title">Студия</h1>
-                    <p class="apartment_text">Площадь — 57,4 м²</p>
-                </div>
-                <div class="apartment_block">
-                    <img class="apartment_img" src="./assets/img/studio_apartment_6.png" alt="apartment">
-                    <h1 class="apartment_title">Студия</h1>
-                    <p class="apartment_text">Площадь — 57,4 м²</p>
-                </div>
 
                 <div class="apartment_block">
                     <img class="apartment_img" src="./assets/img/one_room_apartment_1.png" alt="apartment">
@@ -119,11 +107,6 @@
                     <h1 class="apartment_title">Студия</h1>
                     <p class="apartment_text">Площадь — 57,4 м²</p>
                 </div>
-                <div class="apartment_block">
-                    <img class="apartment_img" src="./assets/img/one_room_apartment_4.png" alt="apartment">
-                    <h1 class="apartment_title">Студия</h1>
-                    <p class="apartment_text">Площадь — 57,4 м²</p>
-                </div>
 
                 <div class="apartment_block">
                     <img class="apartment_img" src="./assets/img/two_roomed_flat_1.png" alt="apartment">
@@ -132,11 +115,6 @@
                 </div>
                 <div class="apartment_block">
                     <img class="apartment_img" src="./assets/img/two_roomed_flat_2.png" alt="apartment">
-                    <h1 class="apartment_title">Студия</h1>
-                    <p class="apartment_text">Площадь — 57,4 м²</p>
-                </div>
-                <div class="apartment_block">
-                    <img class="apartment_img" src="./assets/img/two_roomed_flat_3.png" alt="apartment">
                     <h1 class="apartment_title">Студия</h1>
                     <p class="apartment_text">Площадь — 57,4 м²</p>
                 </div>
@@ -155,17 +133,7 @@
                     <img class="apartment_img" src="./assets/img/three_room_flat_3.png" alt="apartment">
                     <h1 class="apartment_title">Студия</h1>
                     <p class="apartment_text">Площадь — 57,4 м²</p>
-                </div>
-                <div class="apartment_block">
-                    <img class="apartment_img" src="./assets/img/three_room_flat_4.png" alt="apartment">
-                    <h1 class="apartment_title">Студия</h1>
-                    <p class="apartment_text">Площадь — 57,4 м²</p>
-                </div>
-                <div class="apartment_block">
-                    <img class="apartment_img" src="./assets/img/three_room_flat_5.png" alt="apartment">
-                    <h1 class="apartment_title">Студия</h1>
-                    <p class="apartment_text">Площадь — 57,4 м²</p>
-                </div>            
+                </div>          
             </div>
         </div>
 
@@ -222,11 +190,10 @@
 
 
     <div class="modal" data-modal>
-        <div class="modal_block">
+        <div class="modal_container">
             <button type="button" class="close_modal"><strong>&times;</strong></button>
             <form class="form_container"
-                action="https://formspree.io/f/xyyaylkr"
-                method="POST" target="_blank">
+                  action="#">
                 <h2 class="form_title">Введите ваши данные </h2>
                 <h2 class="form_title">и нажмите заказать звонок</h2>
                 <input class="form_input" name="name" required type="text" placeholder="Введите ваше имя">
@@ -238,6 +205,144 @@
         </div>
     </div>
 
+    <div class="modal_calc" data-modal>
+        <div class="modal_calc_container">
+            <button type="button" class="modal_calc_close"><strong>&times;</strong></button>
+            <div class="modal_left">
+                <div class="modal_left_container">
+                    <h1 class="modal_calc_title">Ответьте на несколько вопросов и получите актуальный прайс на квартиры!</h1>
+                    <p class="modal_calc_text">Укажите пожалуйста количество комнат, площадь и вид отделки</p>
+                </div>
+                <div class="button_container">
+                    <button class="modal_apartment_btn">ПЕРЕЙТИ К ПОДБОРУ КВАРТИРЫ</button>
+                </div>
+                
+            </div>
+            <div class="modal_right">
+                <img src="./assets/img/modal_calc_img.jpg" alt="img">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal_apartment" data-modal>
+        <div class="modal_apartment_container">
+            <button type="button" class="modal_apartment_close"><strong>&times;</strong></button>
+            <div class="modal_left">
+                <div class="modal_left_container">
+                    <label>
+                        <input class="checkbox_apartment" type="checkbox" name="checkbox-test">
+                        <span class="checkbox_apartment_span"></span>
+                        <span class="label">СТУДИЯ</span>
+                    </label>
+                    <label>
+                        <input class="checkbox_apartment" type="checkbox" name="checkbox-test">
+                        <span class="checkbox_apartment_span"></span>
+                        <span class="label">ОДНОКОМНАТНАЯ</span>
+                    </label>
+                    <label>
+                        <input class="checkbox_apartment" type="checkbox" name="checkbox-test">
+                        <span class="checkbox_apartment_span"></span>
+                        <span class="label">ДВУХКОМНАТНАЯ</span>
+                    </label>
+                    <label>
+                        <input class="checkbox_apartment" type="checkbox" name="checkbox-test">
+                        <span class="checkbox_apartment_span"></span>
+                        <span class="label">ТРЕХКОМНАТНАЯ</span>
+                    </label>
+                    <label>
+                        <input class="checkbox_apartment" type="checkbox" name="checkbox-test">
+                        <span class="checkbox_apartment_span"></span>
+                        <span class="label">БОЛЬШЕ ТРЕХ КОМНАТ</span>
+                    </label>
+                </div>
+                <div class="button_container">
+                    <button class="modal_area_btn">ДАЛЕЕ</button>
+                </div>
+            </div>
+            <div class="modal_right">
+                <img src="./assets/img/modal_apartment_img.jpg" alt="img">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal_area" data-modal>
+        <div class="modal_area_container">
+            <button type="button" class="modal_area_close"><strong>&times;</strong></button>
+            <div class="modal_left">
+                <div class="modal_left_container">
+                    <h1 class="modal_area_title">Укажите желаемую площадь</h1>
+                    <section class="range-slider">
+                        <div class="range_container">
+                            <span class="rangeValues">50</span>
+                            <span class="rangeValues2">100</span>
+                        </div>
+                        <input class="input_area_from" value="50" min="30" max="170" step="1" type="range">
+                        <input class="input_area_to" value="100" min="30" max="170" step="1" type="range">
+                    </section>
+                </div>
+                <div class="button_container">
+                    <button class="modal_finishing_btn">ДАЛЕЕ</button>
+                </div>  
+            </div>
+            <div class="modal_right">
+                <img src="./assets/img/modal_area_img.jpg" alt="img">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal_finishing" data-modal>
+        <div class="modal_finishing_container">
+            <button type="button" class="modal_finishing_close"><strong>&times;</strong></button>
+            <div class="modal_left">
+                <div class="modal_left_container">
+                    <h1 class="modal_area_title">Выберите вариант отделки</h1>
+                    <div>
+                        <div class="checkbox_container">
+                            <label>
+                                <input class="checkbox_finishing" type="checkbox" name="checkbox-test">
+                                <span class="checkbox_finishing_span" id="cold"></span>
+                                <span class="label">ЧЕРНОВАЯ</span>
+                            </label>                           
+                        </div>
+                        <img src="./assets/img/finishing_img1.jpg" alt="img">
+                    </div>
+                    <div>
+                        <div class="checkbox_container">
+                            <label>
+                                <input class="checkbox_finishing" type="checkbox" name="checkbox-test">
+                                <span class="checkbox_finishing_span" id="cold"></span>
+                                <span class="label">ПРЕДЧИСТОВАЯ</span>
+                            </label>                           
+                        </div>
+                        <img src="./assets/img/finishing_img2.jpg" alt="img">
+                    </div>
+                    <div>
+                        <div class="checkbox_container">
+                            <label>
+                                <input class="checkbox_finishing" type="checkbox" name="checkbox-test">
+                                <span class="checkbox_finishing_span" id="cold"></span>
+                                <span class="label">ЧИСТОВАЯ</span>
+                            </label>                           
+                        </div>
+                        <img src="./assets/img/finishing_img3.jpg" alt="img">
+                    </div>
+                    
+                </div>
+                <div class="button_container">
+                    <button>ДАЛЕЕ</button>
+                </div>  
+            </div>
+            <div class="modal_right">
+                <img src="./assets/img/modal_finishing_img.jpg" alt="img">
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
+
+
+<!-- action="https://formspree.io/f/xyyaylkr"
+                method="POST" target="_blank" -->
+

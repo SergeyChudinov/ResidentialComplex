@@ -100,6 +100,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
 /* harmony import */ var _modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/checkTextInputs */ "./src/js/modules/checkTextInputs.js");
 /* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
+/* harmony import */ var _modules_changeModalState__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/changeModalState */ "./src/js/modules/changeModalState.js");
+/* harmony import */ var _modules_inputRange__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/inputRange */ "./src/js/modules/inputRange.js");
+
+
 
 
 
@@ -109,13 +113,102 @@ window.addEventListener('DOMContentLoaded', () => {
   "use strict";
 
   let modalState = {};
+  Object(_modules_changeModalState__WEBPACK_IMPORTED_MODULE_5__["default"])(modalState);
   Object(_modules_scrolling__WEBPACK_IMPORTED_MODULE_0__["default"])('.pageup');
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_1__["default"])();
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])();
   Object(_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="name"]');
   Object(_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="message"]');
   Object(_modules_mask__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="phone"]');
+  Object(_modules_inputRange__WEBPACK_IMPORTED_MODULE_6__["default"])();
+
+  // function getVals(){
+  //     // Get slider values
+  //     var parent = this.parentNode;
+  //     var slides = parent.getElementsByTagName("input");
+  //       var slide1 = parseFloat( slides[0].value );
+  //       var slide2 = parseFloat( slides[1].value );
+  //     // Neither slider will clip the other, so make sure we determine which is larger
+  //     if( slide1 > slide2 ){ var tmp = slide2; slide2 = slide1; slide1 = tmp; }
+
+  //     let displayElement = parent.getElementsByClassName("rangeValues")[0];
+  //         displayElement.innerHTML = slide1 + " метров";
+
+  //     let displayElement2 = parent.getElementsByClassName("rangeValues2")[0];
+  //         displayElement2.innerHTML = slide2 + " метров";    
+  // }
+
+  // window.onload = function(){
+  //     // Initialize Sliders
+  //     var sliderSections = document.getElementsByClassName("range-slider");
+  //         for( var x = 0; x < sliderSections.length; x++ ){
+  //           var sliders = sliderSections[x].getElementsByTagName("input");
+  //           for( var y = 0; y < sliders.length; y++ ){
+  //             if( sliders[y].type ==="range" ){
+  //               sliders[y].oninput = getVals;
+  //               // Manually trigger event first time to display values
+  //               sliders[y].oninput();
+  //             }
+  //           }
+  //         }
+  // }
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/changeModalState.js":
+/*!********************************************!*\
+  !*** ./src/js/modules/changeModalState.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const changeModalState = state => {
+  const apartments = document.querySelectorAll('.checkbox_apartment');
+  const areaFrom = document.querySelectorAll('.input_area_from');
+  const areaTo = document.querySelectorAll('.input_area_to');
+  function bindActionToElems(event, elem, prop) {
+    elem.forEach((item, i) => {
+      item.addEventListener(event, () => {
+        switch (item.nodeName) {
+          case 'SPAN':
+            state[prop] = i;
+            break;
+          case 'INPUT':
+            if (item.getAttribute('type') === 'checkbox') {
+              i === 0 ? state[prop] = 'Студия' : i === 1 ? state[prop] = 'Однокомнатная' : i == 2 ? state[prop] = 'Двухкомнатная' : i == 3 ? state[prop] = 'Трехкомнатная' : state[prop] = 'Больше трех комнат';
+              elem.forEach((box, j) => {
+                box.checked = false;
+                if (i == j) {
+                  box.checked = true;
+                }
+              });
+            } else {
+              state[prop] = item.value;
+            }
+            break;
+          case 'SELECT':
+            state[prop] = item.value;
+            break;
+        }
+        console.log(state);
+      });
+    });
+  }
+  bindActionToElems('change', apartments, 'apartmentType');
+  bindActionToElems('change', areaFrom, 'area_from');
+  bindActionToElems('change', areaTo, 'area_to');
+};
+/* harmony default export */ __webpack_exports__["default"] = (changeModalState);
+
+// if (elem.length > 1) {
+//     state[prop] = i; 
+// } else {
+//     state[prop] = item.value;
+// }
+// console.log(state);
 
 /***/ }),
 
@@ -159,30 +252,169 @@ const forms = () => {
       item.value = '';
     });
   };
+  const message = {
+    loading: 'Загрузка',
+    success: 'Спасибо! Мы с вами саяжемся!',
+    failure: 'Что-то пошло не так...'
+  };
+  const postData = async (url, data) => {
+    document.querySelector('.status').textContent = message.loading;
+    let res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: data
+    });
+    return await res.json();
+  };
   form.forEach(item => {
     item.addEventListener('submit', e => {
-      // e.preventDefault();
-
+      e.preventDefault();
       let statusMessage = document.createElement('div');
       statusMessage.classList.add('status');
       item.appendChild(statusMessage);
-      statusMessage.textContent = 'Спасибо! Мы с вами саяжемся!';
-      setTimeout(() => {
+      const formData = new FormData(item);
+      const json = JSON.stringify(Object.fromEntries(formData.entries()));
+      postData('https://formspree.io/f/xyyaylkr', json).then(data => {
+        statusMessage.textContent = message.success;
+      }).catch(() => {
+        statusMessage.textContent = message.failure;
+      }).finally(() => {
         clearInputs();
-        statusMessage.remove();
-      }, 5000);
-      setTimeout(() => {
-        const windows = document.querySelectorAll('[data-modal]');
-        windows.forEach(item => {
-          item.style.display = 'none';
-        });
-        document.body.style.overflow = '';
-        document.body.style.marginRight = `0px`;
-      }, 8000);
+        setTimeout(() => {
+          statusMessage.remove();
+        }, 5000);
+        setTimeout(() => {
+          const windows = document.querySelectorAll('[data-modal]');
+          windows.forEach(item => {
+            item.style.display = 'none';
+          });
+          document.body.style.overflow = '';
+          document.body.style.marginRight = `0px`;
+        }, 8000);
+      });
     });
   });
 };
 /* harmony default export */ __webpack_exports__["default"] = (forms);
+
+// const forms = (state) => {
+//     const form = document.querySelectorAll('form');
+//     const inputs = document.querySelectorAll('input');
+
+//     checkNumInputs('input[name="user_phone"]');
+
+//     const message = {
+//         loading: 'Загрузка',
+//         success: 'Спасибо! Мы с вами саяжемся!',
+//         failure: 'Что-то пошло не так...'
+//     }
+
+//     const postData = async (url, data) => {
+//         document.querySelector('.status').textContent = message.loading;
+//         let res = await fetch(url, {
+//             method: 'POST',
+//             headers: {
+//                 'Content-type': 'application/json'
+//             },
+//             body: data
+//         });
+//         // return await res.text();
+//         return await res.json();
+//     };
+//     const clearInputs = () => {
+//         inputs.forEach(item => {
+//             item.value = '';
+//         });
+//     };
+//     form.forEach(item => {
+//         item.addEventListener('submit', (e) => {
+//             e.preventDefault();
+
+//             let statusMessage = document.createElement('div');
+//             statusMessage.classList.add('status');
+//             item.appendChild(statusMessage);
+
+//             const formData = new FormData(item);
+//             if (item.getAttribute('data-calc') === 'end') {
+//                 for(let key in state) {
+//                     formData.append(key, state[key])
+//                 }
+//             }
+
+//             console.log(formData);
+//             console.log(12345);
+//             const json = JSON.stringify(Object.fromEntries(formData.entries()));
+//             console.log(json);
+
+//             postData('http://localhost:3000/requests', json)
+//                 .then(data => {
+//                     console.log(data);
+//                     statusMessage.textContent = message.success;
+//                 }).catch(() => {
+//                     statusMessage.textContent = message.failure;
+//                 }).finally(() => {
+//                     clearInputs();
+//                     setTimeout(() => {
+//                         statusMessage.remove();
+//                     }, 5000);
+//                     setTimeout(() => {
+//                         const windows = document.querySelectorAll('[data-modal]');
+//                         windows.forEach(item => {
+//                             item.style.display = 'none';
+//                         });
+//                         document.body.style.overflow = '';
+//                     }, 8000);
+//                 })
+//         });
+//     });
+// };
+// export default forms;
+
+/***/ }),
+
+/***/ "./src/js/modules/inputRange.js":
+/*!**************************************!*\
+  !*** ./src/js/modules/inputRange.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function getVals() {
+  // Get slider values
+  var parent = this.parentNode;
+  var slides = parent.getElementsByTagName("input");
+  var slide1 = parseFloat(slides[0].value);
+  var slide2 = parseFloat(slides[1].value);
+  // Neither slider will clip the other, so make sure we determine which is larger
+  if (slide1 > slide2) {
+    var tmp = slide2;
+    slide2 = slide1;
+    slide1 = tmp;
+  }
+  let displayElement = parent.getElementsByClassName("rangeValues")[0];
+  displayElement.innerHTML = slide1 + " метров";
+  let displayElement2 = parent.getElementsByClassName("rangeValues2")[0];
+  displayElement2.innerHTML = slide2 + " метров";
+}
+window.onload = function () {
+  // Initialize Sliders
+  var sliderSections = document.getElementsByClassName("range-slider");
+  for (var x = 0; x < sliderSections.length; x++) {
+    var sliders = sliderSections[x].getElementsByTagName("input");
+    for (var y = 0; y < sliders.length; y++) {
+      if (sliders[y].type === "range") {
+        sliders[y].oninput = getVals;
+        // Manually trigger event first time to display values
+        sliders[y].oninput();
+      }
+    }
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (getVals);
 
 /***/ }),
 
@@ -264,7 +496,7 @@ const modals = () => {
         item.style.display = 'none';
       });
       modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
+      // document.body.style.overflow = 'hidden';
       document.body.style.marginRight = `${scroll}px`;
       clearTimeout(modalTimerId);
     }));
@@ -305,6 +537,10 @@ const modals = () => {
     return scrollWidth;
   }
   bindModal('.modal_btn', '.modal', '.close_modal');
+  bindModal('.modal_calc_btn', '.modal_calc', '.modal_calc_close');
+  bindModal('.modal_apartment_btn', '.modal_apartment', '.modal_apartment_close', false);
+  bindModal('.modal_area_btn', '.modal_area', '.modal_area_close', false);
+  bindModal('.modal_finishing_btn', '.modal_finishing', '.modal_finishing_close', false);
   showModalByTime('.modal', 60000);
 };
 /* harmony default export */ __webpack_exports__["default"] = (modals);

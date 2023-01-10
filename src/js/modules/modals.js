@@ -15,7 +15,7 @@ const modals = () => {
                 item.style.display = 'none';
             });
             modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+            // document.body.style.overflow = 'hidden';
             document.body.style.marginRight = `${scroll}px`;
             clearTimeout(modalTimerId);
         }));
@@ -62,6 +62,11 @@ const modals = () => {
     }
 
     bindModal('.modal_btn', '.modal', '.close_modal');
+
+    bindModal('.modal_calc_btn', '.modal_calc', '.modal_calc_close');
+    bindModal('.modal_apartment_btn', '.modal_apartment', '.modal_apartment_close', false);
+    bindModal('.modal_area_btn', '.modal_area', '.modal_area_close', false);
+    bindModal('.modal_finishing_btn', '.modal_finishing', '.modal_finishing_close', false);
     showModalByTime('.modal', 60000);
 };
 export default modals;
