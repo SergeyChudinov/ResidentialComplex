@@ -230,27 +230,27 @@
             <div class="modal_left">
                 <div class="modal_left_container">
                     <label>
-                        <input class="checkbox_apartment" type="checkbox" name="checkbox-test">
+                        <input class="checkbox_apartment" type="checkbox">
                         <span class="checkbox_apartment_span"></span>
                         <span class="label">СТУДИЯ</span>
                     </label>
                     <label>
-                        <input class="checkbox_apartment" type="checkbox" name="checkbox-test">
+                        <input class="checkbox_apartment" type="checkbox">
                         <span class="checkbox_apartment_span"></span>
                         <span class="label">ОДНОКОМНАТНАЯ</span>
                     </label>
                     <label>
-                        <input class="checkbox_apartment" type="checkbox" name="checkbox-test">
+                        <input class="checkbox_apartment" type="checkbox">
                         <span class="checkbox_apartment_span"></span>
                         <span class="label">ДВУХКОМНАТНАЯ</span>
                     </label>
                     <label>
-                        <input class="checkbox_apartment" type="checkbox" name="checkbox-test">
+                        <input class="checkbox_apartment" type="checkbox">
                         <span class="checkbox_apartment_span"></span>
                         <span class="label">ТРЕХКОМНАТНАЯ</span>
                     </label>
                     <label>
-                        <input class="checkbox_apartment" type="checkbox" name="checkbox-test">
+                        <input class="checkbox_apartment" type="checkbox">
                         <span class="checkbox_apartment_span"></span>
                         <span class="label">БОЛЬШЕ ТРЕХ КОМНАТ</span>
                     </label>
@@ -296,30 +296,30 @@
             <div class="modal_left">
                 <div class="modal_left_container">
                     <h1 class="modal_area_title">Выберите вариант отделки</h1>
-                    <div>
-                        <div class="checkbox_container">
+                    <div class="checkbox_container">
+                        <div>
                             <label>
-                                <input class="checkbox_finishing" type="checkbox" name="checkbox-test">
+                                <input class="checkbox_finishing" type="checkbox" name="checkbox">
                                 <span class="checkbox_finishing_span" id="cold"></span>
                                 <span class="label">ЧЕРНОВАЯ</span>
                             </label>                           
                         </div>
                         <img src="./assets/img/finishing_img1.jpg" alt="img">
                     </div>
-                    <div>
-                        <div class="checkbox_container">
+                    <div class="checkbox_container">
+                        <div>
                             <label>
-                                <input class="checkbox_finishing" type="checkbox" name="checkbox-test">
+                                <input class="checkbox_finishing" type="checkbox" name="checkbox">
                                 <span class="checkbox_finishing_span" id="cold"></span>
                                 <span class="label">ПРЕДЧИСТОВАЯ</span>
                             </label>                           
                         </div>
                         <img src="./assets/img/finishing_img2.jpg" alt="img">
                     </div>
-                    <div>
-                        <div class="checkbox_container">
+                    <div class="checkbox_container">
+                        <div>
                             <label>
-                                <input class="checkbox_finishing" type="checkbox" name="checkbox-test">
+                                <input class="checkbox_finishing" type="checkbox" name="checkbox">
                                 <span class="checkbox_finishing_span" id="cold"></span>
                                 <span class="label">ЧИСТОВАЯ</span>
                             </label>                           
@@ -329,11 +329,41 @@
                     
                 </div>
                 <div class="button_container">
-                    <button>ДАЛЕЕ</button>
+                    <button class="modal_finish_btn">ДАЛЕЕ</button>
                 </div>  
             </div>
             <div class="modal_right">
                 <img src="./assets/img/modal_finishing_img.jpg" alt="img">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal_finish" data-modal>
+        <div class="modal_finish_container">
+            <button type="button" class="modal_finish_close"><strong>&times;</strong></button>
+            <div class="modal_left">
+            
+                <form class="form_container"
+                        action="#" data-calc="end">
+
+                    <div class="modal_left_container">
+                        <h2 class="form_title">Введите ваши данные </h2>
+                        <h2 class="form_title">и нажмите заказать звонок</h2>
+                        <input class="form_input" name="name" required type="text" placeholder="Введите ваше имя">
+                        <input class="form_input" name="phone" required type="text" placeholder="Введите телефон">   
+                        <textarea class="form_textarea" name="message"  placeholder="Введите сообщение (не обязательно)"></textarea>
+                    </div>
+                    <div class="button_container">
+                        <button class="form_button" type="submit">Заказать звонок</button>
+                    </div>
+
+                    
+                    
+                </form>
+                
+            </div>
+            <div class="modal_right">
+                <img src="./assets/img/modal_finish_img.jpeg" alt="img">
             </div>
         </div>
     </div>

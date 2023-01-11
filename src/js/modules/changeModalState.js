@@ -2,7 +2,7 @@ const changeModalState = (state) => {
     const apartments = document.querySelectorAll('.checkbox_apartment');
     const areaFrom = document.querySelectorAll('.input_area_from');
     const areaTo = document.querySelectorAll('.input_area_to');
-
+    const finishing = document.querySelectorAll('.checkbox_finishing');
 
     function bindActionToElems (event, elem, prop) {
         elem.forEach((item, i) => {
@@ -12,7 +12,17 @@ const changeModalState = (state) => {
                         state[prop] = i;
                         break;
                     case 'INPUT':
-                        if (item.getAttribute('type') === 'checkbox') {
+                        if (item.getAttribute('name') === 'checkbox') {
+                            i === 0 ? state[prop] = 'Черновая' : 
+                                i === 1 ? state[prop] = 'Предчистовая' :
+                                    state[prop] = 'Чистовая';
+                            elem.forEach((box, j) => {
+                                box.checked = false;
+                                if (i == j) {
+                                    box.checked = true;
+                                }
+                            })
+                        } else if (item.getAttribute('type') === 'checkbox') {
                             i === 0 ? state[prop] = 'Студия' : 
                                 i === 1 ? state[prop] = 'Однокомнатная' :
                                     i == 2 ? state[prop] = 'Двухкомнатная' :
@@ -39,6 +49,7 @@ const changeModalState = (state) => {
     bindActionToElems('change', apartments, 'apartmentType');
     bindActionToElems('change', areaFrom, 'area_from');
     bindActionToElems('change', areaTo, 'area_to');
+    bindActionToElems('change', finishing, 'finishing');
 }
 export default changeModalState;
 

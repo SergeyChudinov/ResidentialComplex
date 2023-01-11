@@ -116,7 +116,7 @@ window.addEventListener('DOMContentLoaded', () => {
   Object(_modules_changeModalState__WEBPACK_IMPORTED_MODULE_5__["default"])(modalState);
   Object(_modules_scrolling__WEBPACK_IMPORTED_MODULE_0__["default"])('.pageup');
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_1__["default"])();
-  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])();
+  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])(modalState);
   Object(_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="name"]');
   Object(_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="message"]');
   Object(_modules_mask__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="phone"]');
@@ -169,6 +169,7 @@ const changeModalState = state => {
   const apartments = document.querySelectorAll('.checkbox_apartment');
   const areaFrom = document.querySelectorAll('.input_area_from');
   const areaTo = document.querySelectorAll('.input_area_to');
+  const finishing = document.querySelectorAll('.checkbox_finishing');
   function bindActionToElems(event, elem, prop) {
     elem.forEach((item, i) => {
       item.addEventListener(event, () => {
@@ -177,7 +178,15 @@ const changeModalState = state => {
             state[prop] = i;
             break;
           case 'INPUT':
-            if (item.getAttribute('type') === 'checkbox') {
+            if (item.getAttribute('name') === 'checkbox') {
+              i === 0 ? state[prop] = 'Черновая' : i === 1 ? state[prop] = 'Предчистовая' : state[prop] = 'Чистовая';
+              elem.forEach((box, j) => {
+                box.checked = false;
+                if (i == j) {
+                  box.checked = true;
+                }
+              });
+            } else if (item.getAttribute('type') === 'checkbox') {
               i === 0 ? state[prop] = 'Студия' : i === 1 ? state[prop] = 'Однокомнатная' : i == 2 ? state[prop] = 'Двухкомнатная' : i == 3 ? state[prop] = 'Трехкомнатная' : state[prop] = 'Больше трех комнат';
               elem.forEach((box, j) => {
                 box.checked = false;
@@ -200,6 +209,7 @@ const changeModalState = state => {
   bindActionToElems('change', apartments, 'apartmentType');
   bindActionToElems('change', areaFrom, 'area_from');
   bindActionToElems('change', areaTo, 'area_to');
+  bindActionToElems('change', finishing, 'finishing');
 };
 /* harmony default export */ __webpack_exports__["default"] = (changeModalState);
 
@@ -244,7 +254,7 @@ const checkTextInputs = selector => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-const forms = () => {
+const forms = state => {
   const form = document.querySelectorAll('form');
   const inputs = document.querySelectorAll('input');
   const clearInputs = () => {
@@ -275,6 +285,11 @@ const forms = () => {
       statusMessage.classList.add('status');
       item.appendChild(statusMessage);
       const formData = new FormData(item);
+      if (item.getAttribute('data-calc') === 'end') {
+        for (let key in state) {
+          formData.append(key, state[key]);
+        }
+      }
       const json = JSON.stringify(Object.fromEntries(formData.entries()));
       postData('https://formspree.io/f/xyyaylkr', json).then(data => {
         statusMessage.textContent = message.success;
@@ -496,7 +511,7 @@ const modals = () => {
         item.style.display = 'none';
       });
       modal.style.display = 'flex';
-      // document.body.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
       document.body.style.marginRight = `${scroll}px`;
       clearTimeout(modalTimerId);
     }));
@@ -541,6 +556,7 @@ const modals = () => {
   bindModal('.modal_apartment_btn', '.modal_apartment', '.modal_apartment_close', false);
   bindModal('.modal_area_btn', '.modal_area', '.modal_area_close', false);
   bindModal('.modal_finishing_btn', '.modal_finishing', '.modal_finishing_close', false);
+  bindModal('.modal_finish_btn', '.modal_finish', '.modal_finish_close', false);
   showModalByTime('.modal', 60000);
 };
 /* harmony default export */ __webpack_exports__["default"] = (modals);
