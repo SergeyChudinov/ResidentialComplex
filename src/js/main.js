@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
     changeModalState(modalState);
     scrolling('.pageup');
     modals();
-    forms();
+    forms(modalState);
     checkTextInputs('[name="name"]');
     checkTextInputs('[name="message"]');
     mask('[name="phone"]');
