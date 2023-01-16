@@ -14,7 +14,7 @@ function getVals(){
         displayElement2.innerHTML = slide2 + " метров";    
 }
   
-window.onload = function(){
+function foo(){  //window.onload = 
     // Initialize Sliders
     var sliderSections = document.getElementsByClassName("range-slider");
         for( var x = 0; x < sliderSections.length; x++ ){
@@ -28,4 +28,4 @@ window.onload = function(){
           }
         }
 }
-export default getVals;
+export default foo;
