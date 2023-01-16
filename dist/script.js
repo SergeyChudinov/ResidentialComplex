@@ -101,7 +101,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/checkTextInputs */ "./src/js/modules/checkTextInputs.js");
 /* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
 /* harmony import */ var _modules_changeModalState__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/changeModalState */ "./src/js/modules/changeModalState.js");
-/* harmony import */ var _modules_inputRange__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/inputRange */ "./src/js/modules/inputRange.js");
+/* harmony import */ var _modules_cards__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/cards */ "./src/js/modules/cards.js");
+/* harmony import */ var _modules_filter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/filter */ "./src/js/modules/filter.js");
+/* harmony import */ var _modules_inputRange__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/inputRange */ "./src/js/modules/inputRange.js");
+
+
 
 
 
@@ -120,39 +124,98 @@ window.addEventListener('DOMContentLoaded', () => {
   Object(_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="name"]');
   Object(_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="message"]');
   Object(_modules_mask__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="phone"]');
-  Object(_modules_inputRange__WEBPACK_IMPORTED_MODULE_6__["default"])();
-
-  // function getVals(){
-  //     // Get slider values
-  //     var parent = this.parentNode;
-  //     var slides = parent.getElementsByTagName("input");
-  //       var slide1 = parseFloat( slides[0].value );
-  //       var slide2 = parseFloat( slides[1].value );
-  //     // Neither slider will clip the other, so make sure we determine which is larger
-  //     if( slide1 > slide2 ){ var tmp = slide2; slide2 = slide1; slide1 = tmp; }
-
-  //     let displayElement = parent.getElementsByClassName("rangeValues")[0];
-  //         displayElement.innerHTML = slide1 + " метров";
-
-  //     let displayElement2 = parent.getElementsByClassName("rangeValues2")[0];
-  //         displayElement2.innerHTML = slide2 + " метров";    
-  // }
-
-  // window.onload = function(){
-  //     // Initialize Sliders
-  //     var sliderSections = document.getElementsByClassName("range-slider");
-  //         for( var x = 0; x < sliderSections.length; x++ ){
-  //           var sliders = sliderSections[x].getElementsByTagName("input");
-  //           for( var y = 0; y < sliders.length; y++ ){
-  //             if( sliders[y].type ==="range" ){
-  //               sliders[y].oninput = getVals;
-  //               // Manually trigger event first time to display values
-  //               sliders[y].oninput();
-  //             }
-  //           }
-  //         }
-  // }
+  Object(_modules_inputRange__WEBPACK_IMPORTED_MODULE_8__["default"])();
+  Object(_modules_cards__WEBPACK_IMPORTED_MODULE_6__["default"])();
+  Object(_modules_filter__WEBPACK_IMPORTED_MODULE_7__["default"])();
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/cards.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/cards.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const apartmentCards = [{
+  title: 'Студия',
+  area: '57,4',
+  img: './assets/img/studio_flat_1.png',
+  className: 'studio'
+}, {
+  title: 'Студия',
+  area: '57,4',
+  img: './assets/img/studio_flat_2.png',
+  className: 'studio'
+}, {
+  title: 'Студия',
+  area: '57,4',
+  img: './assets/img/studio_flat_3.png',
+  className: 'studio'
+}, {
+  title: 'Однокомнатная',
+  area: '57,4',
+  img: '../assets/img/one_room_flat_1.png',
+  className: 'one_rorm_flat'
+}, {
+  title: 'Однокомнатная',
+  area: '57,4',
+  img: './assets/img/one_room_flat_2.png',
+  className: 'one_rorm_flat'
+}, {
+  title: 'Двухкомнатная',
+  area: '57,4',
+  img: './assets/img/two_roomed_flat_1.png',
+  className: 'two_rorm_flat'
+}, {
+  title: 'Двухкомнатная',
+  area: '57,4',
+  img: './assets/img/two_roomed_flat_2.png',
+  className: 'two_rorm_flat'
+}, {
+  title: 'Трехкомнатная',
+  area: '57,4',
+  img: './assets/img/three_room_flat_1.png',
+  className: 'three_rorm_flat'
+}, {
+  title: 'Трехкомнатная',
+  area: '57,4',
+  img: './assets/img/three_room_flat_2.png',
+  className: 'three_rorm_flat'
+}, {
+  title: 'Трехкомнатная',
+  area: '57,4',
+  img: './assets/img/three_room_flat_3.png',
+  className: 'three_rorm_flat'
+}];
+function cards() {
+  const parent = document.querySelector('.apartment_selection_container');
+  const render = (title, area, img, className) => {
+    const element = document.createElement('div');
+    element.classList.add(`apartment_block`);
+    element.classList.add(`all`);
+    element.classList.add(`${className}`);
+    element.innerHTML = `
+            <img class="apartment_img" src="${img}" alt="apartment">
+            <h1 class="apartment_title">${title}</h1>
+            <p class="apartment_text">Площадь — ${area} м²</p>
+        `;
+    parent.append(element);
+  };
+  apartmentCards.map(_ref => {
+    let {
+      title,
+      area,
+      img,
+      className
+    } = _ref;
+    render(title, area, img, className);
+  });
+}
+/* harmony default export */ __webpack_exports__["default"] = (cards);
 
 /***/ }),
 
@@ -242,6 +305,39 @@ const checkTextInputs = selector => {
   });
 };
 /* harmony default export */ __webpack_exports__["default"] = (checkTextInputs);
+
+/***/ }),
+
+/***/ "./src/js/modules/filter.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/filter.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const filter = () => {
+  const menu = document.querySelector('.apartment_filter_container');
+  const items = menu.querySelectorAll('button');
+  const wrapper = document.querySelector('.apartment_selection_container');
+  menu.addEventListener('click', e => {
+    const classList = e.target.classList;
+    if (e.target.closest('button')) {
+      for (const child of wrapper.children) {
+        child.style.display = 'none';
+      }
+      for (const child of items) {
+        child.classList.remove('active');
+      }
+      for (const child of wrapper.querySelectorAll(`.${classList}`)) {
+        child.style.display = 'block';
+      }
+      menu.querySelector(`.${classList}`).classList.add('active');
+    }
+  });
+};
+/* harmony default export */ __webpack_exports__["default"] = (filter);
 
 /***/ }),
 
@@ -415,7 +511,8 @@ function getVals() {
   let displayElement2 = parent.getElementsByClassName("rangeValues2")[0];
   displayElement2.innerHTML = slide2 + " метров";
 }
-window.onload = function () {
+function foo() {
+  //window.onload = 
   // Initialize Sliders
   var sliderSections = document.getElementsByClassName("range-slider");
   for (var x = 0; x < sliderSections.length; x++) {
@@ -428,8 +525,8 @@ window.onload = function () {
       }
     }
   }
-};
-/* harmony default export */ __webpack_exports__["default"] = (getVals);
+}
+/* harmony default export */ __webpack_exports__["default"] = (foo);
 
 /***/ }),
 
@@ -557,7 +654,7 @@ const modals = () => {
   bindModal('.modal_area_btn', '.modal_area', '.modal_area_close', false);
   bindModal('.modal_finishing_btn', '.modal_finishing', '.modal_finishing_close', false);
   bindModal('.modal_finish_btn', '.modal_finish', '.modal_finish_close', false);
-  showModalByTime('.modal', 60000);
+  showModalByTime('.modal', 6000000000);
 };
 /* harmony default export */ __webpack_exports__["default"] = (modals);
 

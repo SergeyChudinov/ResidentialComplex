@@ -68,6 +68,6 @@ const modals = () => {
     bindModal('.modal_area_btn', '.modal_area', '.modal_area_close', false);
     bindModal('.modal_finishing_btn', '.modal_finishing', '.modal_finishing_close', false);
     bindModal('.modal_finish_btn', '.modal_finish', '.modal_finish_close', false);
-    showModalByTime('.modal', 60000);
+    showModalByTime('.modal', 6000000000);
 };
 export default modals;

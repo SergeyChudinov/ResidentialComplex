@@ -1,0 +1,112 @@
+header {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: relative;
+    .header_img {
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        position: absolute;
+        object-fit: cover;
+    }
+    .header_top {
+        height: 100px;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 10;
+        .header_container {
+            display: flex;
+            justify-content: space-between; 
+            .logo {
+                height: 80px;
+                margin-left: 20px;
+            }
+            nav {
+                display: flex;
+                align-items: center;
+                ul {
+                    display: flex;
+                    justify-content: space-between;
+                    li {
+                        margin-right: 10px;
+                        list-style-type: none;
+                        a {
+                            text-decoration: none;
+                            color: rgb(255, 255, 255);
+                            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                        }
+                    }
+                    li:last-child {
+                        margin-right: 0;
+                    } 
+                }
+            }
+            .phone {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                cursor: pointer;
+                .phone_container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
+                    margin-right: 20px;
+                    .phone_img {
+                        width: 25px;
+                        height: 25px;
+                        color: #fff;
+                    }
+                    .phone_number {
+                        margin-left: 10px;
+                        color: rgb(255, 255, 255);
+                        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                    }
+                }
+                .call_back {
+                    color: rgb(150, 144, 144);
+                }
+            }
+        }
+    }
+    .header_bottom {
+        display: flex;
+        justify-content: space-around;
+        height: 100%;  
+        background-color: rgba(0, 0, 0, 0.6); 
+        z-index: 10; 
+        .header_container {
+            display: flex;
+            align-items: center;
+            .header_inline-block{
+                display: inline-block;
+                .header__subtitle {
+                    color: white;
+                }
+                .header__title {
+                    color: white;
+                    text-align: center;
+                }
+                .header_button {
+                    display: flex;
+                    justify-content: center;
+                    .modal_calc_btn {
+                        margin-top: 15px;
+                        padding: 10px;
+                        width: 200px;
+                        height: 60px;
+                        border: 1px solid rgba(41, 41, 41, 0.16);
+                        border-radius: 10px;
+                        background: linear-gradient(180deg, #ffed26 0%, #ffb400 100%);
+                        cursor: pointer;
+                        // transition: all 0.5s;
+                        animation: heartbeat 1.5s ease-in-out infinite both;
+                    }
+                    .modal_calc_btn:hover {
+                        background: linear-gradient(180deg, #ffb400 0%, #ffed26 100%);
+                        // transform: scale(1.1);
+                    }
+                }
+            }
+        }
+    }
+}
