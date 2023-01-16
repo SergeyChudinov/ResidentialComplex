@@ -1,3 +1,19 @@
+@mixin fontstyleTitle($d, $jc, $mb, $c, $ff, $fs) {
+  display: $d;
+  justify-content: $jc;
+  margin-bottom: $mb;
+  color: $c;
+  font-family: $ff;
+  font-size: $fs;
+}
+@mixin fontstyleText($c, $ff, $fs, $lh, $mb) {
+  color: $c;
+  font-family: $ff;
+  font-size: $fs;
+  line-height: $lh;
+  margin-bottom: $mb;
+}
+
 @mixin range-slider($width, $height, $input-top, $input-bg-color, $input-thumb-color, $float:none, $input-height:15px, $input-border-radius:14px) {
     position: relative;
     width: $width;
