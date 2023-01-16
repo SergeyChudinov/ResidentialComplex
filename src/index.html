@@ -19,7 +19,7 @@
                     <ul>
                         <li><a href="#photo_gallery">ФОТОГАЛЕРЕЯ</a></li>
                         <li><a href="#apartment_selection">ПОДОБРАТЬ КВАРТИРУ</a></li>
-                        <li><a href="#">ИПОТЕКА</a></li>
+                        <li><a href="#mortgage">ИПОТЕКА</a></li>
                         <li><a href="#">АКЦИИ</a></li>
                         <li><a href="#contacts">О КОМПАНИИ</a></li>
                     </ul>
@@ -62,7 +62,8 @@
 
         </div>
 
-        <div class="apartment_selection container" id="apartment_selection">
+        <div class="apartment_selection container"
+             id="apartment_selection">
             <h1 class="apartment_selection_title">ВЫБОР КВАРТИРЫ</h1>
             <p class="apartment_selection_text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe dolore rerum culpa laudantium repellat eaque voluptas repellendus quisquam? Est optio atque repellendus provident, magni dolor modi! Quae, architecto inventore ullam nisi, eos dolores ex voluptatum maxime laudantium corporis assumenda libero.</p>
             <div class="apartment_filter">
@@ -74,32 +75,11 @@
                     <button class="three_rorm_flat">3-КОМНАТНЫЕ</button>                  
                 </div>
             </div>
-            <!-- <div class="apartment_selection_container">
-                <div class="apartment_block all studio">
-                    <img class="apartment_img" src="./assets/img/studio_apartment_1.png" alt="apartment">
-                    <h1 class="apartment_title">Студия</h1>
-                    <p class="apartment_text">Площадь — 57,4 м²</p>
-                </div>
-                <div class="apartment_block all one_rorm_flat">
-                    <img class="apartment_img" src="./assets/img/one_room_apartment_1.png" alt="apartment">
-                    <h1 class="apartment_title">Однокомнатная</h1>
-                    <p class="apartment_text">Площадь — 57,4 м²</p>
-                </div>
-                <div class="apartment_block all two_rorm_flat">
-                    <img class="apartment_img" src="./assets/img/two_roomed_flat_1.png" alt="apartment">
-                    <h1 class="apartment_title">Двухкомнатная</h1>
-                    <p class="apartment_text">Площадь — 57,4 м²</p>
-                </div>    
-                <div class="apartment_block all three_rorm_flat">
-                    <img class="apartment_img" src="./assets/img/three_room_flat_1.png" alt="apartment">
-                    <h1 class="apartment_title">Трехкомнатная</h1>
-                    <p class="apartment_text">Площадь — 57,4 м²</p>
-                </div>     
-            </div> -->
-            <div class="apartment_selection_container">
-                
+            <div class="apartment_selection_container">           
             </div>
         </div>
+
+        
 
         <div class="map container" id="contacts">
             <h1 class="contacts_title">РАСПОЛОЖЕНИЕ ЖК</h1>
@@ -111,6 +91,75 @@
                 <script class="map_iframe" type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Aa88dd8983bfd020db1491a4504d8f6898b8a1a2c2bc74325fdf101d21d567b41&amp;width=100%&amp;height=600&amp;lang=ru_RU&amp;scroll=false"></script>
             </div>
         </div>
+
+        <div class="mortgage container" id="mortgage">
+            <h1 class="mortgage_title">ИПОТЕКА</h1>
+            <p class="mortgage_text">Мы подберем программы ипотечного кредитования, сделаем предварительный расчет ваших ипотечных платежей, поможем заполнить заявку на кредит и направим её во все банки</p>
+            <div class="mortgage_container">
+                <div class="left">
+                    <div class="left_container">
+                        <label for="">Выберите банк</label>
+                        <select id='bank'> </select>
+                    </div>
+                    <div class="left_container">
+                        <label for="">Стоимость недвижимости</label>
+                        <input class="mortgage_input" type="text" value="3000000">
+                        <input class="styled-slider slider-progress" 
+                            type="range" min="1000000" max="30000000" value="3000000">
+                    </div>
+                    <div class="left_container">
+                        <label for="">Первоначальный взнос</label>
+                        <input class="mortgage_input" type="text" value="3000000">
+                        <input class="styled-slider slider-progress" 
+                            type="range" min="100000" max="20000000" value="1000000">
+                    </div>
+                    <div class="left_container">
+                        <label for="">Срок кредита</label>
+                        <input class="mortgage_input" type="text" value="3000000">
+                        <input class="styled-slider slider-progress" 
+                            type="range" min="1" max="30" value="10">
+                    </div>                 
+                </div>
+                <div class="right">
+                    <div class="modal_container">
+                        <div class="credit">
+                            <div class="credit_left">
+                                <div class="credit_container">
+                                    <p>Сумма кредита</p>
+                                    <span>2 700 000</span>
+                                </div>
+                                <div class="credit_container">
+                                    <p>Выбранный банк</p>
+                                    <span>Сбербанк</span>
+                                </div>                       
+                            </div>
+                            <div class="credit_right">
+                                <div class="credit_container">
+                                    <p>Ежемесячный платеж</p>
+                                    <span>2 700</span>
+                                </div>
+                                <div class="credit_container">
+                                    <p>Процентная ставка</p>
+                                    <span>6.7 %</span>
+                                </div>                               
+                            </div>
+                        </div>
+                        <form class="form_container"
+                                action="#">
+                            <h2 class="form_title">Получите одобрение ипотеки</h2>
+                            <!-- <h2 class="form_title">и нажмите заказать звонок</h2> -->
+                            <input class="form_input" name="name" required type="text" placeholder="Введите ваше имя">
+                            <input class="form_input" name="phone" required type="text" placeholder="Введите телефон">   
+                            <textarea class="form_textarea" name="message"  placeholder="Введите сообщение (не обязательно)"></textarea>
+                            <button class="form_button" type="submit">Заказать звонок</button>
+                            <p class="form_notice">Перезвоним в течение 10 минут</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+  
+        </div>
+
     </main>
 
     <footer>
@@ -147,7 +196,6 @@
 			<path fill-rule="evenodd" clip-rule="evenodd" d="M26 0H0V26H26V0ZM4.6593 17.7519L13.1233 10.33L21.5873 17.7519L22.9059 16.2481L13.7826 8.24813L13.1233 7.67L12.464 8.24813L3.3407 16.2481L4.6593 17.7519Z" fill="black"/>
 		</svg>
 	</a>
-
 
     <div class="modal" data-modal>
         <div class="modal_container">

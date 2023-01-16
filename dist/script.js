@@ -103,7 +103,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_changeModalState__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/changeModalState */ "./src/js/modules/changeModalState.js");
 /* harmony import */ var _modules_cards__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/cards */ "./src/js/modules/cards.js");
 /* harmony import */ var _modules_filter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/filter */ "./src/js/modules/filter.js");
-/* harmony import */ var _modules_inputRange__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/inputRange */ "./src/js/modules/inputRange.js");
+/* harmony import */ var _modules_options__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/options */ "./src/js/modules/options.js");
+/* harmony import */ var _modules_inputValue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/inputValue */ "./src/js/modules/inputValue.js");
+/* harmony import */ var _modules_inputRange__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/inputRange */ "./src/js/modules/inputRange.js");
+
+
 
 
 
@@ -124,9 +128,17 @@ window.addEventListener('DOMContentLoaded', () => {
   Object(_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="name"]');
   Object(_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="message"]');
   Object(_modules_mask__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="phone"]');
-  Object(_modules_inputRange__WEBPACK_IMPORTED_MODULE_8__["default"])();
+  Object(_modules_inputRange__WEBPACK_IMPORTED_MODULE_10__["default"])();
   Object(_modules_cards__WEBPACK_IMPORTED_MODULE_6__["default"])();
   Object(_modules_filter__WEBPACK_IMPORTED_MODULE_7__["default"])();
+  Object(_modules_options__WEBPACK_IMPORTED_MODULE_8__["default"])();
+  Object(_modules_inputValue__WEBPACK_IMPORTED_MODULE_9__["default"])();
+  for (let e of document.querySelectorAll('input[type="range"].slider-progress')) {
+    e.style.setProperty('--value', e.value);
+    e.style.setProperty('--min', e.min == '' ? '0' : e.min);
+    e.style.setProperty('--max', e.max == '' ? '100' : e.max);
+    e.addEventListener('input', () => e.style.setProperty('--value', e.value));
+  }
 });
 
 /***/ }),
@@ -530,6 +542,56 @@ function foo() {
 
 /***/ }),
 
+/***/ "./src/js/modules/inputValue.js":
+/*!**************************************!*\
+  !*** ./src/js/modules/inputValue.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const inputValue = () => {
+  const sliders = document.querySelectorAll('.styled-slider');
+  const inputs = document.querySelectorAll('.mortgage_input');
+  const sliderValue = slider => {
+    let value;
+    if (slider.value.toString().length < 3) {
+      value = Math.round(slider.value).toString();
+    } else {
+      value = Math.round(slider.value / 1000).toString();
+    }
+    if (value.length == 3) {
+      finalValue = `${value[0]}${value[1]}${value[2]} 000 ₽`;
+    } else if (value.length == 4) {
+      finalValue = `${value[0]} ${value[1]}${value[2]}${value[3]} 000 ₽`;
+    } else if (value.length == 5) {
+      finalValue = `${value[0]}${value[1]} ${value[2]}${value[3]}${value[4]} 000 ₽`;
+    } else {
+      if (value == 1) {
+        finalValue = `${value} год`;
+      } else if (value > 1 && value < 5) {
+        finalValue = `${value} года`;
+      } else {
+        finalValue = `${value} лет`;
+      }
+    }
+    slider.previousElementSibling.value = finalValue;
+  };
+  let finalValue;
+  sliders.forEach(slider => {
+    sliderValue(slider);
+  });
+  sliders.forEach(slider => {
+    slider.addEventListener('input', () => {
+      sliderValue(slider);
+    });
+  });
+};
+/* harmony default export */ __webpack_exports__["default"] = (inputValue);
+
+/***/ }),
+
 /***/ "./src/js/modules/mask.js":
 /*!********************************!*\
   !*** ./src/js/modules/mask.js ***!
@@ -657,6 +719,42 @@ const modals = () => {
   showModalByTime('.modal', 6000000000);
 };
 /* harmony default export */ __webpack_exports__["default"] = (modals);
+
+/***/ }),
+
+/***/ "./src/js/modules/options.js":
+/*!***********************************!*\
+  !*** ./src/js/modules/options.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const options = () => {
+  const banks = [{
+    name: 'Сбербанк'
+  }, {
+    name: 'Дом.РФ'
+  }, {
+    name: 'Абсолют банк'
+  }];
+  const select = document.querySelector('#bank');
+  const render = name => {
+    const element = document.createElement('option');
+    element.innerHTML = `
+            ${name}
+        `;
+    select.append(element);
+  };
+  banks.map(_ref => {
+    let {
+      name
+    } = _ref;
+    render(name);
+  });
+};
+/* harmony default export */ __webpack_exports__["default"] = (options);
 
 /***/ }),
 
