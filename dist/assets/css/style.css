@@ -13,6 +13,18 @@ body {
   background-color: rgb(255, 255, 255);
 }
 
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 50px white inset;
+  -webkit-text-fill-color: #333;
+}
+
+.form_input_finish:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 50px rgb(44, 111, 72) inset;
+  -webkit-text-fill-color: rgb(255, 255, 255);
+  border: 1px solid rgba(174, 233, 183, 0.16);
+  text-shadow: 1px 1px 1px #000;
+}
+
 header {
   display: flex;
   flex-direction: column;
@@ -424,7 +436,7 @@ main .mortgage .mortgage_container {
   width: 100%;
 }
 main .mortgage .mortgage_container .left {
-  width: 62%;
+  width: 60%;
   border: 1px solid rgb(201, 203, 201);
   border-radius: 5px;
   padding: 20px;
@@ -463,8 +475,16 @@ main .mortgage .mortgage_container .left .left_container .styled-slider {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+main .mortgage .mortgage_container .left .status {
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  color: red;
+}
 main .mortgage .mortgage_container .right {
-  width: 33%;
+  padding-top: 15px;
+  width: 35%;
   border: 1px solid rgb(201, 203, 201);
   border-radius: 5px;
   display: flex;
@@ -473,7 +493,10 @@ main .mortgage .mortgage_container .right {
 main .mortgage .mortgage_container .right .modal_container .credit {
   padding: 20px 20px 0 20px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+main .mortgage .mortgage_container .right .modal_container .credit .credit_left {
+  width: 50%;
 }
 main .mortgage .mortgage_container .right .modal_container .credit .credit_left .credit_container {
   display: flex;
@@ -488,6 +511,16 @@ main .mortgage .mortgage_container .right .modal_container .credit .credit_left 
   margin-bottom: 15px;
   font-size: 24px;
 }
+main .mortgage .mortgage_container .right .modal_container .credit .credit_left .credit_container .status {
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  color: red;
+}
+main .mortgage .mortgage_container .right .modal_container .credit .credit_right {
+  width: 50%;
+}
 main .mortgage .mortgage_container .right .modal_container .credit .credit_right .credit_container {
   display: flex;
   flex-direction: column;
@@ -500,6 +533,13 @@ main .mortgage .mortgage_container .right .modal_container .credit .credit_right
 main .mortgage .mortgage_container .right .modal_container .credit .credit_right .credit_container span {
   margin-bottom: 15px;
   font-size: 24px;
+}
+main .mortgage .mortgage_container .right .modal_container .credit .credit_right .credit_container .status {
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  color: red;
 }
 main .mortgage .mortgage_container .right .modal_container .form_container {
   padding: 20px;
@@ -1321,7 +1361,6 @@ footer .footer .footer_container .logo {
 /*generated with Input range slider CSS style generator (version 20211225)
 https://toughengineer.github.io/demo/slider-styler*/
 input[type=range].styled-slider {
-  height: 2em;
   -webkit-appearance: none;
 }
 
@@ -1342,7 +1381,7 @@ input[type=range].styled-slider::-webkit-slider-thumb {
   width: 2em;
   height: 2em;
   border-radius: 1em;
-  background: #32BE56;
+  background: #5CBC81;
   border: none;
   box-shadow: 0 0 2px black;
   margin-top: calc(max((1em - 1px - 1px) * 0.5, 0px) - 1em);
@@ -1352,38 +1391,24 @@ input[type=range].styled-slider::-webkit-slider-runnable-track {
   height: 1em;
   border: 1px solid #b2b2b2;
   border-radius: 0.5em;
-  background: #89D687;
+  background: #FFFFFF;
   box-shadow: none;
 }
 
 input[type=range].styled-slider::-webkit-slider-thumb:hover {
-  background: #1C7E3D;
+  background: #117C1B;
 }
 
 input[type=range].styled-slider:hover::-webkit-slider-runnable-track {
-  background: #89D687;
   border-color: #9a9a9a;
 }
 
-input[type=range].styled-slider::-webkit-slider-thumb:active {
-  background: #1C7E3D;
-}
-
 input[type=range].styled-slider:active::-webkit-slider-runnable-track {
-  background: #89D687;
   border-color: #c1c1c1;
 }
 
 input[type=range].styled-slider.slider-progress::-webkit-slider-runnable-track {
-  background: linear-gradient(#217436, #217436) 0/var(--sx) 100% no-repeat, #89D687;
-}
-
-input[type=range].styled-slider.slider-progress:hover::-webkit-slider-runnable-track {
-  background: linear-gradient(#217436, #217436) 0/var(--sx) 100% no-repeat, #89D687;
-}
-
-input[type=range].styled-slider.slider-progress:active::-webkit-slider-runnable-track {
-  background: linear-gradient(#217436, #217436) 0/var(--sx) 100% no-repeat, #89D687;
+  background: linear-gradient(#67D169, #67D169) 0/var(--sx) 100% no-repeat, #FFFFFF;
 }
 
 /*mozilla*/
@@ -1391,7 +1416,7 @@ input[type=range].styled-slider::-moz-range-thumb {
   width: 2em;
   height: 2em;
   border-radius: 1em;
-  background: #32BE56;
+  background: #5CBC81;
   border: none;
   box-shadow: 0 0 2px black;
 }
@@ -1400,38 +1425,24 @@ input[type=range].styled-slider::-moz-range-track {
   height: max(1em - 1px - 1px, 0px);
   border: 1px solid #b2b2b2;
   border-radius: 0.5em;
-  background: #89D687;
+  background: #FFFFFF;
   box-shadow: none;
 }
 
 input[type=range].styled-slider::-moz-range-thumb:hover {
-  background: #1C7E3D;
+  background: #117C1B;
 }
 
 input[type=range].styled-slider:hover::-moz-range-track {
-  background: #89D687;
   border-color: #9a9a9a;
 }
 
-input[type=range].styled-slider::-moz-range-thumb:active {
-  background: #1C7E3D;
-}
-
 input[type=range].styled-slider:active::-moz-range-track {
-  background: #89D687;
   border-color: #c1c1c1;
 }
 
 input[type=range].styled-slider.slider-progress::-moz-range-track {
-  background: linear-gradient(#217436, #217436) 0/var(--sx) 100% no-repeat, #89D687;
-}
-
-input[type=range].styled-slider.slider-progress:hover::-moz-range-track {
-  background: linear-gradient(#217436, #217436) 0/var(--sx) 100% no-repeat, #89D687;
-}
-
-input[type=range].styled-slider.slider-progress:active::-moz-range-track {
-  background: linear-gradient(#217436, #217436) 0/var(--sx) 100% no-repeat, #89D687;
+  background: linear-gradient(#67D169, #67D169) 0/var(--sx) 100% no-repeat, #FFFFFF;
 }
 
 /*ms*/
@@ -1449,7 +1460,7 @@ input[type=range].styled-slider::-ms-thumb {
   width: 2em;
   height: 2em;
   border-radius: 1em;
-  background: #32BE56;
+  background: #5CBC81;
   border: none;
   box-shadow: 0 0 2px black;
   margin-top: 0;
@@ -1459,27 +1470,21 @@ input[type=range].styled-slider::-ms-thumb {
 input[type=range].styled-slider::-ms-track {
   height: 1em;
   border-radius: 0.5em;
-  background: #89D687;
+  background: #FFFFFF;
   border: 1px solid #b2b2b2;
   box-shadow: none;
   box-sizing: border-box;
 }
 
 input[type=range].styled-slider::-ms-thumb:hover {
-  background: #1C7E3D;
+  background: #117C1B;
 }
 
 input[type=range].styled-slider:hover::-ms-track {
-  background: #89D687;
   border-color: #9a9a9a;
 }
 
-input[type=range].styled-slider::-ms-thumb:active {
-  background: #1C7E3D;
-}
-
 input[type=range].styled-slider:active::-ms-track {
-  background: #89D687;
   border-color: #c1c1c1;
 }
 
@@ -1487,17 +1492,7 @@ input[type=range].styled-slider.slider-progress::-ms-fill-lower {
   height: max(1em - 1px - 1px, 0px);
   border-radius: 0.5em 0 0 0.5em;
   margin: -1px 0 -1px -1px;
-  background: #217436;
+  background: #67D169;
   border: 1px solid #b2b2b2;
   border-right-width: 0;
-}
-
-input[type=range].styled-slider.slider-progress:hover::-ms-fill-lower {
-  background: #217436;
-  border-color: #9a9a9a;
-}
-
-input[type=range].styled-slider.slider-progress:active::-ms-fill-lower {
-  background: #217436;
-  border-color: #c1c1c1;
 }/*# sourceMappingURL=style.css.map */
