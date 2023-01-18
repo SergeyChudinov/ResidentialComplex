@@ -105,7 +105,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_filter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/filter */ "./src/js/modules/filter.js");
 /* harmony import */ var _modules_options__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/options */ "./src/js/modules/options.js");
 /* harmony import */ var _modules_inputValue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/inputValue */ "./src/js/modules/inputValue.js");
-/* harmony import */ var _modules_inputRange__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/inputRange */ "./src/js/modules/inputRange.js");
+/* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
+/* harmony import */ var _modules_inputRange__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/inputRange */ "./src/js/modules/inputRange.js");
 
 
 
@@ -117,29 +118,131 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+const banks = [{
+  name: 'Сбербанк',
+  interestRate: 6.7
+}, {
+  name: 'Дом.РФ',
+  interestRate: 6.8
+}, {
+  name: 'Абсолют банк',
+  interestRate: 6.5
+}];
 window.addEventListener('DOMContentLoaded', () => {
   "use strict";
 
   let modalState = {};
-  Object(_modules_changeModalState__WEBPACK_IMPORTED_MODULE_5__["default"])(modalState);
+  let calcState = {};
+  Object(_modules_changeModalState__WEBPACK_IMPORTED_MODULE_5__["default"])(modalState, calcState);
   Object(_modules_scrolling__WEBPACK_IMPORTED_MODULE_0__["default"])('.pageup');
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_1__["default"])();
-  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])(modalState);
+  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])(modalState, calcState);
   Object(_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="name"]');
   Object(_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="message"]');
   Object(_modules_mask__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="phone"]');
-  Object(_modules_inputRange__WEBPACK_IMPORTED_MODULE_10__["default"])();
+  Object(_modules_inputRange__WEBPACK_IMPORTED_MODULE_11__["foo"])();
+  Object(_modules_inputRange__WEBPACK_IMPORTED_MODULE_11__["inputRange"])();
   Object(_modules_cards__WEBPACK_IMPORTED_MODULE_6__["default"])();
   Object(_modules_filter__WEBPACK_IMPORTED_MODULE_7__["default"])();
-  Object(_modules_options__WEBPACK_IMPORTED_MODULE_8__["default"])();
-  Object(_modules_inputValue__WEBPACK_IMPORTED_MODULE_9__["default"])();
-  for (let e of document.querySelectorAll('input[type="range"].slider-progress')) {
-    e.style.setProperty('--value', e.value);
-    e.style.setProperty('--min', e.min == '' ? '0' : e.min);
-    e.style.setProperty('--max', e.max == '' ? '100' : e.max);
-    e.addEventListener('input', () => e.style.setProperty('--value', e.value));
-  }
+  Object(_modules_options__WEBPACK_IMPORTED_MODULE_8__["default"])(banks);
+  Object(_modules_inputValue__WEBPACK_IMPORTED_MODULE_9__["default"])(_modules_inputRange__WEBPACK_IMPORTED_MODULE_11__["inputRange"], () => Object(_modules_calc__WEBPACK_IMPORTED_MODULE_10__["default"])(calcState, banks));
+  Object(_modules_calc__WEBPACK_IMPORTED_MODULE_10__["default"])(calcState, banks);
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/calc.js":
+/*!********************************!*\
+  !*** ./src/js/modules/calc.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const calc = (state, banks) => {
+  const bankBlock = document.querySelector('#bank');
+  const realEstateValueBlock = document.querySelector('#real_estate_value');
+  const anInitialFeeBlock = document.querySelector('#an_initial_fee');
+  const creditTermBlock = document.querySelector('#credit_term');
+  let amountOfCreditBlock = document.querySelector('.credit_container .bank');
+  let selectedBankBlock = document.querySelector('.credit_container .real_estate_value');
+  let monthlyPaymentBlock = document.querySelector('.credit_container .an_initial_fee');
+  let interestRateBlock = document.querySelector('.credit_container .credit_term');
+  let realEstateValue = null; //Стоимость недвижимости
+  let anInitialFee = null; //Первоначальный взнос
+  let creditTerm = null; //Срок кредита
+
+  const calcFunc = () => {
+    selectedBankBlock.textContent = bankBlock.value; // банк
+
+    realEstateValue = realEstateValueBlock.value;
+    anInitialFee = anInitialFeeBlock.value;
+    const aOCB = (realEstateValue - anInitialFee).toString();
+    if (aOCB.length <= 5) {
+      // Сумма кредита
+      amountOfCreditBlock.classList.add('status');
+      amountOfCreditBlock.textContent = `сумма слишком низкая`;
+    } else if (aOCB.length === 6) {
+      amountOfCreditBlock.textContent = `${aOCB[0]}${aOCB[1]}${aOCB[2]} 000 ₽`;
+      amountOfCreditBlock.classList.remove('status');
+    } else if (aOCB.length === 7) {
+      amountOfCreditBlock.textContent = `${aOCB[0]} ${aOCB[1]}${aOCB[2]}${aOCB[3]} 000 ₽`;
+      amountOfCreditBlock.classList.remove('status');
+    } else {
+      amountOfCreditBlock.textContent = `${aOCB[0]}${aOCB[1]} ${aOCB[2]}${aOCB[3]}${aOCB[4]} 000 ₽`;
+      amountOfCreditBlock.classList.remove('status');
+    }
+    const bankObj = banks.find(bank => bank.name == bankBlock.value);
+    interestRateBlock.textContent = bankObj.interestRate + ' %'; // % ставка
+
+    const s = realEstateValue - anInitialFee; //1000000
+    const p = bankObj.interestRate / 1200; // 0.005583333333333333
+    creditTerm = creditTermBlock.value; // 12
+    const m = creditTerm * 12;
+    const stavka = Math.pow(1 + p, m);
+    const sum = Math.round(s * p * stavka / (stavka - 1));
+    const sumStr = sum.toString();
+    if (sumStr.length <= 3) {
+      monthlyPaymentBlock.classList.add('status');
+      monthlyPaymentBlock.textContent = `сумма слишком низкая`;
+    } else if (sumStr.length === 4) {
+      monthlyPaymentBlock.textContent = `${sumStr[0]} ${sumStr[1]}${sumStr[2]}${sumStr[3]} ₽`;
+      monthlyPaymentBlock.classList.remove('status');
+    } else if (sumStr.length === 5) {
+      monthlyPaymentBlock.textContent = `${sumStr[0]}${sumStr[1]} ${sumStr[2]}${sumStr[3]}${sumStr[4]} ₽`;
+      monthlyPaymentBlock.classList.remove('status');
+    } else {
+      monthlyPaymentBlock.textContent = `${sumStr[0]}${sumStr[1]}${sumStr[2]} ${sumStr[3]}${sumStr[4]}${sumStr[5]} ₽`;
+      monthlyPaymentBlock.classList.remove('status');
+    }
+    if (+aOCB <= 0) {
+      amountOfCreditBlock.classList.add('status');
+      amountOfCreditBlock.textContent = `некорректное значение`;
+      monthlyPaymentBlock.classList.add('status');
+      monthlyPaymentBlock.textContent = `некорректное значение`;
+    }
+    state['Ежемесячный платеж'] = sum;
+  };
+  bankBlock.addEventListener('change', e => {
+    calcFunc();
+  });
+  realEstateValueBlock.addEventListener('input', e => {
+    realEstateValue = e.target.value;
+    calcFunc();
+  });
+  anInitialFeeBlock.addEventListener('input', e => {
+    anInitialFee = e.target.value;
+    calcFunc();
+  });
+  creditTermBlock.addEventListener('input', e => {
+    creditTerm = e.target.value;
+    calcFunc();
+  });
+  calcFunc();
+};
+/* harmony default export */ __webpack_exports__["default"] = (calc);
 
 /***/ }),
 
@@ -240,18 +343,22 @@ function cards() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-const changeModalState = state => {
+const changeModalState = (state, calcState) => {
   const apartments = document.querySelectorAll('.checkbox_apartment');
   const areaFrom = document.querySelectorAll('.input_area_from');
   const areaTo = document.querySelectorAll('.input_area_to');
   const finishing = document.querySelectorAll('.checkbox_finishing');
+  const bank = document.querySelectorAll('#bank');
+  const realEstateValue = document.querySelectorAll('#real_estate_value');
+  const anInitialFee = document.querySelectorAll('#an_initial_fee');
+  const creditTerm = document.querySelectorAll('#credit_term');
+  const price = document.querySelectorAll('.price');
+  const fee = document.querySelectorAll('.fee');
+  const term = document.querySelectorAll('.term');
   function bindActionToElems(event, elem, prop) {
     elem.forEach((item, i) => {
       item.addEventListener(event, () => {
         switch (item.nodeName) {
-          case 'SPAN':
-            state[prop] = i;
-            break;
           case 'INPUT':
             if (item.getAttribute('name') === 'checkbox') {
               i === 0 ? state[prop] = 'Черновая' : i === 1 ? state[prop] = 'Предчистовая' : state[prop] = 'Чистовая';
@@ -270,30 +377,35 @@ const changeModalState = state => {
                 }
               });
             } else {
-              state[prop] = item.value;
+              if (item.classList.contains('styled-slider') || item.classList.contains('mortgage_input')) {
+                calcState[prop] = item.value;
+              } else {
+                state[prop] = item.value;
+              }
             }
             break;
           case 'SELECT':
-            state[prop] = item.value;
+            calcState[prop] = item.value;
             break;
         }
         console.log(state);
+        console.log(calcState);
       });
     });
   }
-  bindActionToElems('change', apartments, 'apartmentType');
-  bindActionToElems('change', areaFrom, 'area_from');
-  bindActionToElems('change', areaTo, 'area_to');
-  bindActionToElems('change', finishing, 'finishing');
+  bindActionToElems('change', apartments, 'тип квартиры');
+  bindActionToElems('change', areaFrom, 'площадь от');
+  bindActionToElems('change', areaTo, 'площадь до');
+  bindActionToElems('change', finishing, 'вариант отделки');
+  bindActionToElems('change', bank, 'банк');
+  bindActionToElems('change', realEstateValue, 'cтоимость недвижимости');
+  bindActionToElems('change', anInitialFee, 'первоначальный взнос');
+  bindActionToElems('change', creditTerm, 'срок кредита');
+  bindActionToElems('change', price, 'Стоимость недвижимости');
+  bindActionToElems('change', fee, 'Первоначальный взнос');
+  bindActionToElems('change', term, 'Срок кредита');
 };
 /* harmony default export */ __webpack_exports__["default"] = (changeModalState);
-
-// if (elem.length > 1) {
-//     state[prop] = i; 
-// } else {
-//     state[prop] = item.value;
-// }
-// console.log(state);
 
 /***/ }),
 
@@ -362,9 +474,9 @@ const filter = () => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-const forms = state => {
+const forms = (state, calcState) => {
   const form = document.querySelectorAll('form');
-  const inputs = document.querySelectorAll('input');
+  const inputs = document.querySelectorAll('.input');
   const clearInputs = () => {
     inputs.forEach(item => {
       item.value = '';
@@ -393,13 +505,19 @@ const forms = state => {
       statusMessage.classList.add('status');
       item.appendChild(statusMessage);
       const formData = new FormData(item);
-      if (item.getAttribute('data-calc') === 'end') {
+      if (item.getAttribute('data-form') === 'end') {
+        console.log('data-form');
         for (let key in state) {
           formData.append(key, state[key]);
         }
+      } else if (item.getAttribute('data-calc') === 'end') {
+        console.log('data-calc');
+        for (let key in calcState) {
+          formData.append(key, calcState[key]);
+        }
       }
       const json = JSON.stringify(Object.fromEntries(formData.entries()));
-      postData('https://formspree.io/f/xyyaylkr', json).then(data => {
+      postData('https://formspree.io/f/xvongrgr', json).then(data => {
         statusMessage.textContent = message.success;
       }).catch(() => {
         statusMessage.textContent = message.failure;
@@ -422,78 +540,8 @@ const forms = state => {
 };
 /* harmony default export */ __webpack_exports__["default"] = (forms);
 
-// const forms = (state) => {
-//     const form = document.querySelectorAll('form');
-//     const inputs = document.querySelectorAll('input');
-
-//     checkNumInputs('input[name="user_phone"]');
-
-//     const message = {
-//         loading: 'Загрузка',
-//         success: 'Спасибо! Мы с вами саяжемся!',
-//         failure: 'Что-то пошло не так...'
-//     }
-
-//     const postData = async (url, data) => {
-//         document.querySelector('.status').textContent = message.loading;
-//         let res = await fetch(url, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-type': 'application/json'
-//             },
-//             body: data
-//         });
-//         // return await res.text();
-//         return await res.json();
-//     };
-//     const clearInputs = () => {
-//         inputs.forEach(item => {
-//             item.value = '';
-//         });
-//     };
-//     form.forEach(item => {
-//         item.addEventListener('submit', (e) => {
-//             e.preventDefault();
-
-//             let statusMessage = document.createElement('div');
-//             statusMessage.classList.add('status');
-//             item.appendChild(statusMessage);
-
-//             const formData = new FormData(item);
-//             if (item.getAttribute('data-calc') === 'end') {
-//                 for(let key in state) {
-//                     formData.append(key, state[key])
-//                 }
-//             }
-
-//             console.log(formData);
-//             console.log(12345);
-//             const json = JSON.stringify(Object.fromEntries(formData.entries()));
-//             console.log(json);
-
-//             postData('http://localhost:3000/requests', json)
-//                 .then(data => {
-//                     console.log(data);
-//                     statusMessage.textContent = message.success;
-//                 }).catch(() => {
-//                     statusMessage.textContent = message.failure;
-//                 }).finally(() => {
-//                     clearInputs();
-//                     setTimeout(() => {
-//                         statusMessage.remove();
-//                     }, 5000);
-//                     setTimeout(() => {
-//                         const windows = document.querySelectorAll('[data-modal]');
-//                         windows.forEach(item => {
-//                             item.style.display = 'none';
-//                         });
-//                         document.body.style.overflow = '';
-//                     }, 8000);
-//                 })
-//         });
-//     });
-// };
-// export default forms;
+// https://formspree.io/f/xyyaylkr
+// https://formspree.io/f/xvongrgr
 
 /***/ }),
 
@@ -501,11 +549,13 @@ const forms = state => {
 /*!**************************************!*\
   !*** ./src/js/modules/inputRange.js ***!
   \**************************************/
-/*! exports provided: default */
+/*! exports provided: foo, inputRange */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "foo", function() { return foo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inputRange", function() { return inputRange; });
 function getVals() {
   // Get slider values
   var parent = this.parentNode;
@@ -538,7 +588,16 @@ function foo() {
     }
   }
 }
-/* harmony default export */ __webpack_exports__["default"] = (foo);
+// export default foo;
+
+const inputRange = () => {
+  for (let e of document.querySelectorAll('input[type="range"].slider-progress')) {
+    e.style.setProperty('--value', e.value);
+    e.style.setProperty('--min', e.min == '' ? '0' : e.min);
+    e.style.setProperty('--max', e.max == '' ? '100' : e.max);
+    e.addEventListener('input', () => e.style.setProperty('--value', e.value));
+  }
+};
 
 /***/ }),
 
@@ -551,21 +610,22 @@ function foo() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-const inputValue = () => {
+const inputValue = (inputRange, calc) => {
   const sliders = document.querySelectorAll('.styled-slider');
   const inputs = document.querySelectorAll('.mortgage_input');
   const sliderValue = slider => {
     let value;
-    if (slider.value.toString().length < 3) {
-      value = Math.round(slider.value).toString();
+    if (slider.value >= 31) {
+      slider.value = Math.round(slider.value / 1000) * 1000;
+      value = (Math.round(slider.value / 1000) * 1000).toString();
     } else {
-      value = Math.round(slider.value / 1000).toString();
+      value = Math.round(slider.value).toString();
     }
-    if (value.length == 3) {
+    if (value.length == 6) {
       finalValue = `${value[0]}${value[1]}${value[2]} 000 ₽`;
-    } else if (value.length == 4) {
+    } else if (value.length == 7) {
       finalValue = `${value[0]} ${value[1]}${value[2]}${value[3]} 000 ₽`;
-    } else if (value.length == 5) {
+    } else if (value.length == 8) {
       finalValue = `${value[0]}${value[1]} ${value[2]}${value[3]}${value[4]} 000 ₽`;
     } else {
       if (value == 1) {
@@ -578,6 +638,34 @@ const inputValue = () => {
     }
     slider.previousElementSibling.value = finalValue;
   };
+  const inputsValue = input => {
+    let valueS;
+    const valueArr = input.value.match(/\d/ig);
+    let value = +valueArr.join('');
+    if (value >= 31) {
+      value = Math.floor(value / 1000) * 1000;
+      valueS = value.toString();
+    } else {
+      valueS = value.toString();
+    }
+    if (valueS.length == 6) {
+      input.value = `${valueS[0]}${valueS[1]}${valueS[2]} 000 ₽`;
+    } else if (valueS.length == 7) {
+      input.value = `${valueS[0]} ${valueS[1]}${valueS[2]}${valueS[3]} 000 ₽`;
+    } else if (valueS.length == 8) {
+      input.value = `${valueS[0]}${valueS[1]} ${valueS[2]}${valueS[3]}${valueS[4]} 000 ₽`;
+    } else {
+      if (valueS == 1) {
+        input.value = `${valueS} год`;
+      } else if (valueS > 1 && value < 5) {
+        input.value = `${valueS} года`;
+      } else {
+        input.value = `${valueS} лет`;
+      }
+    }
+    input.nextElementSibling.value = value;
+    inputRange();
+  };
   let finalValue;
   sliders.forEach(slider => {
     sliderValue(slider);
@@ -585,6 +673,12 @@ const inputValue = () => {
   sliders.forEach(slider => {
     slider.addEventListener('input', () => {
       sliderValue(slider);
+    });
+  });
+  inputs.forEach(input => {
+    input.addEventListener('change', () => {
+      inputsValue(input);
+      calc();
     });
   });
 };
@@ -731,17 +825,25 @@ const modals = () => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-const options = () => {
-  const banks = [{
-    name: 'Сбербанк'
-  }, {
-    name: 'Дом.РФ'
-  }, {
-    name: 'Абсолют банк'
-  }];
+const options = banks => {
+  // const banks = [{
+  //         name: 'Сбербанк',
+  //         interestRate: 6.7
+  //     },
+  //     {
+  //         name: 'Дом.РФ',
+  //         interestRate: 6.8
+  //     },
+  //     {
+  //         name: 'Абсолют банк',
+  //         interestRate: 6.5
+  //     }
+  // ]
+
   const select = document.querySelector('#bank');
-  const render = name => {
+  const render = (name, interestRate) => {
     const element = document.createElement('option');
+    element.setAttribute('data-rate', interestRate);
     element.innerHTML = `
             ${name}
         `;
@@ -749,9 +851,10 @@ const options = () => {
   };
   banks.map(_ref => {
     let {
-      name
+      name,
+      interestRate
     } = _ref;
-    render(name);
+    render(name, interestRate);
   });
 };
 /* harmony default export */ __webpack_exports__["default"] = (options);

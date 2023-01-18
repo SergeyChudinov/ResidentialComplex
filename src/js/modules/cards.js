@@ -1,5 +1,4 @@
-const apartmentCards = [
-    {
+const apartmentCards = [{
         title: 'Студия',
         area: '57,4',
         img: './assets/img/studio_flat_1.png',
@@ -59,7 +58,6 @@ const apartmentCards = [
         img: './assets/img/three_room_flat_3.png',
         className: 'three_rorm_flat'
     }
-
 ]
 
 
@@ -82,7 +80,12 @@ function cards() {
     }
 
 
-    apartmentCards.map(({title, area, img, className}) => {
+    apartmentCards.map(({
+        title,
+        area,
+        img,
+        className
+    }) => {
         render(title, area, img, className)
     })
 

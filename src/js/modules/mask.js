@@ -3,8 +3,7 @@ const mask = (selector) => {
         elem.focus();
         if (elem.setSelectionRange) {
             elem.setSelectionRange(pos, pos);
-        } 
-        else if (elem.createTextRange) {
+        } else if (elem.createTextRange) {
             let range = elem.createTextRange();
             range.collapse(true);
             range.moveEnd('character', pos);
@@ -21,11 +20,11 @@ const mask = (selector) => {
         if (def.length >= val.length) {
             val = def;
         }
-        this.value = matrix.replace(/./g, function(a) {
+        this.value = matrix.replace(/./g, function (a) {
             return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? '' : a;
         });
 
-        if(event.type === 'blur') {
+        if (event.type === 'blur') {
             if (this.value.length == 2) {
                 this.value = '';
             }

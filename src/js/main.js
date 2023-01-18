@@ -8,34 +8,48 @@ import cards from "./modules/cards";
 import filter from "./modules/filter";
 import options from "./modules/options";
 import inputValue from "./modules/inputValue";
+import calc from "./modules/calc";
 
-import foo from "./modules/inputRange";
+import {
+  foo,
+  inputRange
+} from "./modules/inputRange";
+
+const banks = [{
+    name: 'Сбербанк',
+    interestRate: 6.7
+  },
+  {
+    name: 'Дом.РФ',
+    interestRate: 6.8
+  },
+  {
+    name: 'Абсолют банк',
+    interestRate: 6.5
+  }
+]
 
 window.addEventListener('DOMContentLoaded', () => {
-    "use strict";
-    let modalState = {};
+  "use strict";
+  let modalState = {};
+  let calcState = {};
 
 
-    changeModalState(modalState);
-    scrolling('.pageup');
-    modals();
-    forms(modalState);
-    checkTextInputs('[name="name"]');
-    checkTextInputs('[name="message"]');
-    mask('[name="phone"]');
-    foo();
-    cards();
-    filter();
-    options();
-    inputValue();
+  changeModalState(modalState, calcState);
+  scrolling('.pageup');
+  modals();
+  forms(modalState, calcState);
+  checkTextInputs('[name="name"]');
+  checkTextInputs('[name="message"]');
+  mask('[name="phone"]');
+  foo();
+  inputRange();
+  cards();
+  filter();
+  options(banks);
+  inputValue(inputRange, () => calc(calcState, banks));
+  calc(calcState, banks);
 
 
 
-    for (let e of document.querySelectorAll('input[type="range"].slider-progress')) {
-        e.style.setProperty('--value', e.value);
-        e.style.setProperty('--min', e.min == '' ? '0' : e.min);
-        e.style.setProperty('--max', e.max == '' ? '100' : e.max);
-        e.addEventListener('input', () => e.style.setProperty('--value', e.value));
-      }
 });
-

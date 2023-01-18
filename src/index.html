@@ -99,25 +99,26 @@
                 <div class="left">
                     <div class="left_container">
                         <label for="">Выберите банк</label>
-                        <select id='bank'> </select>
+                        <select id='bank'></select>
                     </div>
                     <div class="left_container">
                         <label for="">Стоимость недвижимости</label>
-                        <input class="mortgage_input" type="text" value="3000000">
-                        <input class="styled-slider slider-progress" 
-                            type="range" min="1000000" max="30000000" value="3000000">
+                        <input class="mortgage_input price" type="text" value="3000000">
+                        <input class="styled-slider slider-progress real_estate_value" 
+                            type="range" min="1000000" max="30000000" value="2000000" id="real_estate_value">
                     </div>
                     <div class="left_container">
                         <label for="">Первоначальный взнос</label>
-                        <input class="mortgage_input" type="text" value="3000000">
-                        <input class="styled-slider slider-progress" 
-                            type="range" min="100000" max="20000000" value="1000000">
+                        <input class="mortgage_input fee" type="text" value="3000000">
+                        <input class="styled-slider slider-progress an_initial_fee" 
+                            type="range" min="100000" max="20000000" value="1000000" id="an_initial_fee">
                     </div>
                     <div class="left_container">
                         <label for="">Срок кредита</label>
-                        <input class="mortgage_input" type="text" value="3000000">
+                        <input class="mortgage_input term" type="text" value="3000000">
                         <input class="styled-slider slider-progress" 
-                            type="range" min="1" max="30" value="10">
+                            type="range" min="1" max="30" value="10"
+                            id="credit_term">
                     </div>                 
                 </div>
                 <div class="right">
@@ -126,31 +127,31 @@
                             <div class="credit_left">
                                 <div class="credit_container">
                                     <p>Сумма кредита</p>
-                                    <span>2 700 000</span>
+                                    <span class="bank">2 700 000</span>
                                 </div>
                                 <div class="credit_container">
                                     <p>Выбранный банк</p>
-                                    <span>Сбербанк</span>
+                                    <span 
+                                        class="real_estate_value"></span>
                                 </div>                       
                             </div>
                             <div class="credit_right">
                                 <div class="credit_container">
                                     <p>Ежемесячный платеж</p>
-                                    <span>2 700</span>
+                                    <span class="an_initial_fee">2 700</span>
                                 </div>
                                 <div class="credit_container">
                                     <p>Процентная ставка</p>
-                                    <span>6.7 %</span>
+                                    <span class="credit_term">6.7 %</span>
                                 </div>                               
                             </div>
                         </div>
                         <form class="form_container"
-                                action="#">
+                                action="#" data-calc="end">
                             <h2 class="form_title">Получите одобрение ипотеки</h2>
-                            <!-- <h2 class="form_title">и нажмите заказать звонок</h2> -->
-                            <input class="form_input" name="name" required type="text" placeholder="Введите ваше имя">
-                            <input class="form_input" name="phone" required type="text" placeholder="Введите телефон">   
-                            <textarea class="form_textarea" name="message"  placeholder="Введите сообщение (не обязательно)"></textarea>
+                            <input class="form_input input" name="name" required type="text" placeholder="Введите ваше имя">
+                            <input class="form_input input" name="phone" required type="text" placeholder="Введите телефон">   
+                            <textarea class="form_textarea input" name="message"  placeholder="Введите сообщение (не обязательно)"></textarea>
                             <button class="form_button" type="submit">Заказать звонок</button>
                             <p class="form_notice">Перезвоним в течение 10 минут</p>
                         </form>
@@ -204,9 +205,9 @@
                   action="#">
                 <h2 class="form_title">Введите ваши данные </h2>
                 <h2 class="form_title">и нажмите заказать звонок</h2>
-                <input class="form_input" name="name" required type="text" placeholder="Введите ваше имя">
-                <input class="form_input" name="phone" required type="text" placeholder="Введите телефон">   
-                <textarea class="form_textarea" name="message"  placeholder="Введите сообщение (не обязательно)"></textarea>
+                <input class="form_input input" name="name" required type="text" placeholder="Введите ваше имя">
+                <input class="form_input input" name="phone" required type="text" placeholder="Введите телефон">   
+                <textarea class="form_textarea input" name="message"  placeholder="Введите сообщение (не обязательно)"></textarea>
                 <button class="form_button" type="submit">Заказать звонок</button>
                 <p class="form_notice">Перезвоним в течение 10 минут</p>
             </form>
@@ -351,13 +352,13 @@
             <button type="button" class="modal_finish_close"><strong>&times;</strong></button>
             <div class="modal_left">           
                 <form class="form_container"
-                        action="#" data-calc="end">
+                        action="#" data-form="end">
                     <div class="modal_left_container">
                         <h2 class="form_title">Введите ваши данные </h2>
                         <h2 class="form_title">и нажмите заказать звонок</h2>
-                        <input class="form_input" name="name" required type="text" placeholder="Введите ваше имя">
-                        <input class="form_input" name="phone" required type="text" placeholder="Введите телефон">   
-                        <textarea class="form_textarea" name="message"  placeholder="Введите сообщение (не обязательно)"></textarea>
+                        <input class="form_input form_input_finish input" name="name" required type="text" placeholder="Введите ваше имя">
+                        <input class="form_input form_input_finish input" name="phone" required type="text" placeholder="Введите телефон">   
+                        <textarea class="form_textarea input" name="message"  placeholder="Введите сообщение (не обязательно)"></textarea>
                     </div>
                     <div class="button_container">
                         <button class="form_button" type="submit">Заказать звонок</button>
