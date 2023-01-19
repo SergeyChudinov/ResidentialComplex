@@ -17,7 +17,7 @@ import {
 
 const banks = [{
     name: 'Сбербанк',
-    interestRate: 6.7
+    interestRate: 0.7
   },
   {
     name: 'Дом.РФ',
@@ -46,9 +46,9 @@ window.addEventListener('DOMContentLoaded', () => {
   inputRange();
   cards();
   filter();
-  options(banks);
+  // options(banks);
   inputValue(inputRange, () => calc(calcState, banks));
-  calc(calcState, banks);
+  calc(calcState, banks, inputRange);
 
 
 

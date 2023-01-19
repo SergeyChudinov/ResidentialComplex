@@ -1,4 +1,4 @@
-const calc = (state, banks) => {
+const calc = (state, banks, inputRange) => {
     const bankBlock = document.querySelector('#bank');
     const realEstateValueBlock = document.querySelector('#real_estate_value');
     const anInitialFeeBlock = document.querySelector('#an_initial_fee');
@@ -15,10 +15,13 @@ const calc = (state, banks) => {
     let creditTerm = null;   //Срок кредита
 
     const calcFunc = () => {
-        selectedBankBlock.textContent = bankBlock.value; // банк
+        const attention = document.querySelector('.attention');
+
+        // selectedBankBlock.textContent = bankBlock.value; // банк
 
         realEstateValue = realEstateValueBlock.value;
         anInitialFee = anInitialFeeBlock.value;
+
         const aOCB = (realEstateValue - anInitialFee).toString();
         if (aOCB.length <= 5) { // Сумма кредита
             amountOfCreditBlock.classList.add('status');
@@ -35,17 +38,18 @@ const calc = (state, banks) => {
         }
 
 
-        const bankObj = banks.find(bank => bank.name == bankBlock.value);
-        interestRateBlock.textContent = bankObj.interestRate + ' %'; // % ставка
+        // const bankObj = banks.find(bank => bank.name == bankBlock.value);
+        // interestRateBlock.textContent = bankObj.interestRate + ' %'; // % ставка
 
         const s = realEstateValue - anInitialFee;  //1000000
-        const p = (bankObj.interestRate / 1200);  // 0.005583333333333333
+        // const p = (bankObj.interestRate / 1200);  // 0.005583333333333333
+        const p = (0.7 / 1200);
         creditTerm = creditTermBlock.value;  // 12
         const m = (creditTerm * 12);
         const stavka = Math.pow((1 + p), m) ;
         const sum = Math.round((s * p * stavka) / (stavka - 1));
         const sumStr = sum.toString();
-        if (sumStr.length <= 3) {
+        if (sumStr.length <= 3) { // Ежемесячный платеж
             monthlyPaymentBlock.classList.add('status');
             monthlyPaymentBlock.textContent = `сумма слишком низкая`;
         } else if (sumStr.length === 4) {
@@ -64,30 +68,32 @@ const calc = (state, banks) => {
             amountOfCreditBlock.textContent = `некорректное значение`;
             monthlyPaymentBlock.classList.add('status');
             monthlyPaymentBlock.textContent = `некорректное значение`;
+
+            attention.classList.add('error');
+            attention.textContent = 'Первоначальный взнос должен быть меньше стоимость недвижимости';
+        } else {
+            attention.textContent = '';
         }
 
         state['Ежемесячный платеж'] = sum;
     };
 
-
-
-    bankBlock.addEventListener('change', (e) => {
-        calcFunc();
-    });
+    // bankBlock.addEventListener('change', (e) => {
+    //     calcFunc();
+    // });
     realEstateValueBlock.addEventListener('input', (e) => {
-        realEstateValue = e.target.value;
         calcFunc();
     });
     anInitialFeeBlock.addEventListener('input', (e) => {
-        anInitialFee = e.target.value;
         calcFunc();
     });
     creditTermBlock.addEventListener('input', (e) => {
-        creditTerm = e.target.value;
         calcFunc();
     });
 
     calcFunc();
+
+    document.querySelector('.credit').style.display = 'none';
    
 };
 export default calc;

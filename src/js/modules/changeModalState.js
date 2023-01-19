@@ -53,8 +53,8 @@ const changeModalState = (state, calcState) => {
                         calcState[prop] = item.value;
                         break;
                 }
-                console.log(state);
-                console.log(calcState);
+                // console.log(state);
+                // console.log(calcState);
             });
         });
     }

@@ -475,7 +475,7 @@ main .mortgage .mortgage_container .left .left_container .styled-slider {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-main .mortgage .mortgage_container .left .status {
+main .mortgage .mortgage_container .left .error {
   padding-top: 10px;
   display: flex;
   justify-content: center;

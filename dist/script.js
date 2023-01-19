@@ -121,7 +121,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const banks = [{
   name: 'Сбербанк',
-  interestRate: 6.7
+  interestRate: 0.7
 }, {
   name: 'Дом.РФ',
   interestRate: 6.8
@@ -145,9 +145,9 @@ window.addEventListener('DOMContentLoaded', () => {
   Object(_modules_inputRange__WEBPACK_IMPORTED_MODULE_11__["inputRange"])();
   Object(_modules_cards__WEBPACK_IMPORTED_MODULE_6__["default"])();
   Object(_modules_filter__WEBPACK_IMPORTED_MODULE_7__["default"])();
-  Object(_modules_options__WEBPACK_IMPORTED_MODULE_8__["default"])(banks);
+  // options(banks);
   Object(_modules_inputValue__WEBPACK_IMPORTED_MODULE_9__["default"])(_modules_inputRange__WEBPACK_IMPORTED_MODULE_11__["inputRange"], () => Object(_modules_calc__WEBPACK_IMPORTED_MODULE_10__["default"])(calcState, banks));
-  Object(_modules_calc__WEBPACK_IMPORTED_MODULE_10__["default"])(calcState, banks);
+  Object(_modules_calc__WEBPACK_IMPORTED_MODULE_10__["default"])(calcState, banks, _modules_inputRange__WEBPACK_IMPORTED_MODULE_11__["inputRange"]);
 });
 
 /***/ }),
@@ -161,7 +161,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-const calc = (state, banks) => {
+const calc = (state, banks, inputRange) => {
   const bankBlock = document.querySelector('#bank');
   const realEstateValueBlock = document.querySelector('#real_estate_value');
   const anInitialFeeBlock = document.querySelector('#an_initial_fee');
@@ -175,7 +175,9 @@ const calc = (state, banks) => {
   let creditTerm = null; //Срок кредита
 
   const calcFunc = () => {
-    selectedBankBlock.textContent = bankBlock.value; // банк
+    const attention = document.querySelector('.attention');
+
+    // selectedBankBlock.textContent = bankBlock.value; // банк
 
     realEstateValue = realEstateValueBlock.value;
     anInitialFee = anInitialFeeBlock.value;
@@ -194,17 +196,20 @@ const calc = (state, banks) => {
       amountOfCreditBlock.textContent = `${aOCB[0]}${aOCB[1]} ${aOCB[2]}${aOCB[3]}${aOCB[4]} 000 ₽`;
       amountOfCreditBlock.classList.remove('status');
     }
-    const bankObj = banks.find(bank => bank.name == bankBlock.value);
-    interestRateBlock.textContent = bankObj.interestRate + ' %'; // % ставка
+
+    // const bankObj = banks.find(bank => bank.name == bankBlock.value);
+    // interestRateBlock.textContent = bankObj.interestRate + ' %'; // % ставка
 
     const s = realEstateValue - anInitialFee; //1000000
-    const p = bankObj.interestRate / 1200; // 0.005583333333333333
+    // const p = (bankObj.interestRate / 1200);  // 0.005583333333333333
+    const p = 0.7 / 1200;
     creditTerm = creditTermBlock.value; // 12
     const m = creditTerm * 12;
     const stavka = Math.pow(1 + p, m);
     const sum = Math.round(s * p * stavka / (stavka - 1));
     const sumStr = sum.toString();
     if (sumStr.length <= 3) {
+      // Ежемесячный платеж
       monthlyPaymentBlock.classList.add('status');
       monthlyPaymentBlock.textContent = `сумма слишком низкая`;
     } else if (sumStr.length === 4) {
@@ -222,25 +227,28 @@ const calc = (state, banks) => {
       amountOfCreditBlock.textContent = `некорректное значение`;
       monthlyPaymentBlock.classList.add('status');
       monthlyPaymentBlock.textContent = `некорректное значение`;
+      attention.classList.add('error');
+      attention.textContent = 'Первоначальный взнос должен быть меньше стоимость недвижимости';
+    } else {
+      attention.textContent = '';
     }
     state['Ежемесячный платеж'] = sum;
   };
-  bankBlock.addEventListener('change', e => {
-    calcFunc();
-  });
+
+  // bankBlock.addEventListener('change', (e) => {
+  //     calcFunc();
+  // });
   realEstateValueBlock.addEventListener('input', e => {
-    realEstateValue = e.target.value;
     calcFunc();
   });
   anInitialFeeBlock.addEventListener('input', e => {
-    anInitialFee = e.target.value;
     calcFunc();
   });
   creditTermBlock.addEventListener('input', e => {
-    creditTerm = e.target.value;
     calcFunc();
   });
   calcFunc();
+  document.querySelector('.credit').style.display = 'none';
 };
 /* harmony default export */ __webpack_exports__["default"] = (calc);
 
@@ -388,11 +396,12 @@ const changeModalState = (state, calcState) => {
             calcState[prop] = item.value;
             break;
         }
-        console.log(state);
-        console.log(calcState);
+        // console.log(state);
+        // console.log(calcState);
       });
     });
   }
+
   bindActionToElems('change', apartments, 'тип квартиры');
   bindActionToElems('change', areaFrom, 'площадь от');
   bindActionToElems('change', areaTo, 'площадь до');
@@ -511,7 +520,6 @@ const forms = (state, calcState) => {
           formData.append(key, state[key]);
         }
       } else if (item.getAttribute('data-calc') === 'end') {
-        console.log('data-calc');
         for (let key in calcState) {
           formData.append(key, calcState[key]);
         }
@@ -612,7 +620,8 @@ const inputRange = () => {
 __webpack_require__.r(__webpack_exports__);
 const inputValue = (inputRange, calc) => {
   const sliders = document.querySelectorAll('.styled-slider');
-  const inputs = document.querySelectorAll('.mortgage_input');
+  const inputs = document.querySelectorAll('.mortgage_input.price, .mortgage_input.fee');
+  const inputsCT = document.querySelector('.mortgage_input.term');
   const sliderValue = slider => {
     let value;
     if (slider.value >= 31) {
@@ -655,6 +664,28 @@ const inputValue = (inputRange, calc) => {
     } else if (valueS.length == 8) {
       input.value = `${valueS[0]}${valueS[1]} ${valueS[2]}${valueS[3]}${valueS[4]} 000 ₽`;
     } else {
+      const min = input.nextElementSibling.getAttribute('min');
+      if (min == 100000) {
+        input.value = `100 000 ₽`;
+        value = min;
+      } else {
+        input.value = `1 000 000 ₽`;
+        value = min;
+      }
+    }
+    input.nextElementSibling.value = value;
+    inputRange();
+    console.log(input.nextElementSibling.value);
+  };
+  const inputsCTValue = input => {
+    let value;
+    const valueArr = input.value.match(/\d/ig);
+    if (!valueArr) {
+      value = 1;
+      input.value = `1 год`;
+    } else {
+      value = +valueArr.join('');
+      let valueS = value.toString();
       if (valueS == 1) {
         input.value = `${valueS} год`;
       } else if (valueS > 1 && value < 5) {
@@ -680,6 +711,10 @@ const inputValue = (inputRange, calc) => {
       inputsValue(input);
       calc();
     });
+  });
+  inputsCT.addEventListener('change', () => {
+    inputsCTValue(inputsCT);
+    calc();
   });
 };
 /* harmony default export */ __webpack_exports__["default"] = (inputValue);
