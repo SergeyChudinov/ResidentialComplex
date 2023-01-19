@@ -41,7 +41,6 @@ const forms = (state, calcState) => {
                     formData.append(key, state[key])
                 }
             } else if (item.getAttribute('data-calc') === 'end') {
-                console.log('data-calc')
                 for (let key in calcState) {
                     formData.append(key, calcState[key])
                 }
