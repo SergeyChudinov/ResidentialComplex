@@ -660,7 +660,8 @@ main .slider div .slider_container .img_div {
   height: 105px;
 }
 main .slider div .slider_container .img_div img {
-  width: 100%;
+  padding: 5px;
+  width: 90%;
 }
 
 footer {
