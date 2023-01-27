@@ -3,6 +3,10 @@ const sliders = (selector) => {
 	let slides = container.children;
 	let paused = false;
 
+	for (const slide of slides) {
+		slide.classList.add('animated');
+		slide.classList.add('slideInRight');
+	}
 
 	function activateAnimation() {
 		paused = setInterval(() => nextSlide(), 3000);
@@ -10,7 +14,9 @@ const sliders = (selector) => {
 	activateAnimation();
 
 	const nextSlide = () => {
-		container.appendChild(slides[0]);
+		for (let i = 0; i <= slides.length; i++) {
+			container.appendChild(slides[0]);
+		}
 	}
 
 	container.addEventListener('mouseenter', () => {

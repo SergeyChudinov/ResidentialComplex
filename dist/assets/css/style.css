@@ -271,6 +271,22 @@ section.range-slider input[type=range]::-moz-focus-outer {
     animation-timing-function: ease-out;
   }
 }
+@-webkit-keyframes slideInRight {
+  from {
+    transform: translate3d(100%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes slideInRight {
+  from {
+    transform: translate3d(100%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
 main .photo_gallery {
   margin: 100px auto;
 }
@@ -486,6 +502,7 @@ main .mortgage .mortgage_container .left .error {
   color: red;
 }
 main .mortgage .mortgage_container .right {
+  background-color: #ffffff;
   padding-top: 15px;
   width: 35%;
   border: 1px solid rgb(201, 203, 201);
@@ -637,10 +654,9 @@ main .slider .slider_title {
   margin-bottom: 50px;
   color: #083a06;
   font-family: "Oswald,sans-serif";
-  font-size: 42px;
+  font-size: 32px;
 }
 main .slider div {
-  width: 100%;
   overflow-x: hidden;
 }
 main .slider div .slider_container {
@@ -648,9 +664,6 @@ main .slider div .slider_container {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  flex-direction: row;
   gap: 34px;
 }
 main .slider div .slider_container .img_div {
@@ -662,6 +675,16 @@ main .slider div .slider_container .img_div {
 main .slider div .slider_container .img_div img {
   padding: 5px;
   width: 90%;
+}
+main .slider div .slider_container .slideInRight {
+  -webkit-animation-name: slideInRight;
+          animation-name: slideInRight;
+}
+main .slider div .slider_container .animated {
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
 }
 
 footer {
