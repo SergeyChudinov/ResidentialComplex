@@ -137,7 +137,6 @@ main {
             }
         }
     }
-    
     .map {
         margin: 100px auto;
         .contacts_title {
@@ -229,6 +228,7 @@ main {
                 }
             }
             .right {
+                background-color: #ffffff;
                 padding-top: 15px;
                 width: 35%;
                 border: 1px solid rgb(201, 203, 201);
@@ -359,17 +359,13 @@ main {
     }
     .slider {
         .slider_title {
-            @include fontstyleTitle(flex, center, 50px, $title-color, 'Oswald,sans-serif', 42px);
+            @include fontstyleTitle(flex, center, 50px, $title-color, 'Oswald,sans-serif', 32px);
         }
         div {
-            width: 100%;
             overflow-x: hidden;
             .slider_container {
                 display: flex;
                 width: fit-content;
-                flex-wrap: nowrap;
-                justify-content: flex-start;
-                flex-direction: row;
                 gap: 34px;
                 .img_div {
                     display: flex;
@@ -381,15 +377,18 @@ main {
                         width: 90%;
                     }
                 }
+                .slideInRight {
+                    animation-name: slideInRight;
+                }
+                .animated {
+                    animation-duration: 0.5s;
+                    animation-fill-mode: both;
+                }
             }
         }
-
     }
 }
-
-
 
 @import "footer";
 @import "modal";
 @import "inputRange";
-
