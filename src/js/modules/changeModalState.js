@@ -12,7 +12,7 @@ const changeModalState = (state, calcState) => {
     const price = document.querySelectorAll('.price');
     const fee = document.querySelectorAll('.fee');
     const term = document.querySelectorAll('.term');
-  
+
     function bindActionToElems(event, elem, prop) {
         elem.forEach((item, i) => {
             item.addEventListener(event, () => {
@@ -42,11 +42,11 @@ const changeModalState = (state, calcState) => {
                             })
                         } else {
                             if (item.classList.contains('styled-slider') ||
-                            item.classList.contains('mortgage_input')) {
+                                item.classList.contains('mortgage_input')) {
                                 calcState[prop] = item.value;
                             } else {
                                 state[prop] = item.value;
-                            } 
+                            }
                         }
                         break;
                     case 'SELECT':

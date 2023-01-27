@@ -106,7 +106,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_options__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/options */ "./src/js/modules/options.js");
 /* harmony import */ var _modules_inputValue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/inputValue */ "./src/js/modules/inputValue.js");
 /* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
-/* harmony import */ var _modules_inputRange__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/inputRange */ "./src/js/modules/inputRange.js");
+/* harmony import */ var _modules_images__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/images */ "./src/js/modules/images.js");
+/* harmony import */ var _modules_sliders__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modules/sliders */ "./src/js/modules/sliders.js");
+/* harmony import */ var _modules_inputRange__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/inputRange */ "./src/js/modules/inputRange.js");
+
+
 
 
 
@@ -141,13 +145,15 @@ window.addEventListener('DOMContentLoaded', () => {
   Object(_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="name"]');
   Object(_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="message"]');
   Object(_modules_mask__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="phone"]');
-  Object(_modules_inputRange__WEBPACK_IMPORTED_MODULE_11__["foo"])();
-  Object(_modules_inputRange__WEBPACK_IMPORTED_MODULE_11__["inputRange"])();
+  Object(_modules_inputRange__WEBPACK_IMPORTED_MODULE_13__["foo"])();
+  Object(_modules_inputRange__WEBPACK_IMPORTED_MODULE_13__["inputRange"])();
   Object(_modules_cards__WEBPACK_IMPORTED_MODULE_6__["default"])();
   Object(_modules_filter__WEBPACK_IMPORTED_MODULE_7__["default"])();
   // options(banks);
-  Object(_modules_inputValue__WEBPACK_IMPORTED_MODULE_9__["default"])(_modules_inputRange__WEBPACK_IMPORTED_MODULE_11__["inputRange"], () => Object(_modules_calc__WEBPACK_IMPORTED_MODULE_10__["default"])(calcState, banks));
-  Object(_modules_calc__WEBPACK_IMPORTED_MODULE_10__["default"])(calcState, banks, _modules_inputRange__WEBPACK_IMPORTED_MODULE_11__["inputRange"]);
+  Object(_modules_inputValue__WEBPACK_IMPORTED_MODULE_9__["default"])(_modules_inputRange__WEBPACK_IMPORTED_MODULE_13__["inputRange"], () => Object(_modules_calc__WEBPACK_IMPORTED_MODULE_10__["default"])(calcState, banks));
+  Object(_modules_calc__WEBPACK_IMPORTED_MODULE_10__["default"])(calcState, banks, _modules_inputRange__WEBPACK_IMPORTED_MODULE_13__["inputRange"]);
+  Object(_modules_images__WEBPACK_IMPORTED_MODULE_11__["default"])();
+  Object(_modules_sliders__WEBPACK_IMPORTED_MODULE_12__["default"])('.slider_container');
 });
 
 /***/ }),
@@ -553,6 +559,63 @@ const forms = (state, calcState) => {
 
 /***/ }),
 
+/***/ "./src/js/modules/images.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/images.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const images = () => {
+  const imgPopup = document.createElement('div');
+  const workSection = document.querySelector('.photo_gallery');
+  const bigImage = document.createElement('img');
+  bigImage.classList.add('big_image');
+  const scroll = calcScroll(); // добавил отсуп для скрола
+
+  imgPopup.classList.add('popup');
+  workSection.appendChild(imgPopup);
+  imgPopup.style.justifyContent = 'center';
+  imgPopup.style.alignItems = 'center';
+  imgPopup.style.display = 'none';
+  imgPopup.appendChild(bigImage);
+  workSection.addEventListener('click', e => {
+    e.preventDefault();
+    let target = e.target;
+    if (target && target.closest('.preview')) {
+      imgPopup.style.display = 'flex';
+      const path = target.getAttribute('src');
+      bigImage.src = path;
+      document.body.style.overflow = 'hidden';
+      document.body.style.marginRight = `${scroll}px`; // добавил отсуп для скрола
+    }
+
+    if (target && target.matches('div.popup')) {
+      // if (target && target.classList.contains('popup')) {
+      imgPopup.style.display = 'none';
+      document.body.style.overflow = '';
+      document.body.style.marginRight = `0px`;
+    }
+  });
+};
+function calcScroll() {
+  // добавил отсуп для скрола
+  let div = document.createElement('div');
+  div.style.width = '50px';
+  div.style.height = '50px';
+  div.style.overflowY = 'scroll';
+  div.style.visibility = 'hidden';
+  document.body.appendChild(div);
+  let scrollWidth = div.offsetWidth - div.clientWidth;
+  div.remove();
+  return scrollWidth;
+}
+/* harmony default export */ __webpack_exports__["default"] = (images);
+
+/***/ }),
+
 /***/ "./src/js/modules/inputRange.js":
 /*!**************************************!*\
   !*** ./src/js/modules/inputRange.js ***!
@@ -949,6 +1012,37 @@ const scrolling = upSelector => {
   });
 };
 /* harmony default export */ __webpack_exports__["default"] = (scrolling);
+
+/***/ }),
+
+/***/ "./src/js/modules/sliders.js":
+/*!***********************************!*\
+  !*** ./src/js/modules/sliders.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const sliders = selector => {
+  const container = document.querySelector(selector);
+  let slides = container.children;
+  let paused = false;
+  function activateAnimation() {
+    paused = setInterval(() => nextSlide(), 3000);
+  }
+  activateAnimation();
+  const nextSlide = () => {
+    container.appendChild(slides[0]);
+  };
+  container.addEventListener('mouseenter', () => {
+    clearInterval(paused);
+  });
+  container.addEventListener('mouseleave', () => {
+    activateAnimation();
+  });
+};
+/* harmony default export */ __webpack_exports__["default"] = (sliders);
 
 /***/ })
 

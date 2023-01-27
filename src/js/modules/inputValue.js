@@ -59,7 +59,7 @@ const inputValue = (inputRange, calc) => {
             }
         }
         input.nextElementSibling.value = value;
-        inputRange()
+        inputRange();
         console.log(input.nextElementSibling.value)
     }
 

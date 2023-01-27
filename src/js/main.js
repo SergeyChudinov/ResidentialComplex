@@ -9,6 +9,8 @@ import filter from "./modules/filter";
 import options from "./modules/options";
 import inputValue from "./modules/inputValue";
 import calc from "./modules/calc";
+import images from './modules/images';
+import sliders from './modules/sliders';
 
 import {
   foo,
@@ -49,7 +51,8 @@ window.addEventListener('DOMContentLoaded', () => {
   // options(banks);
   inputValue(inputRange, () => calc(calcState, banks));
   calc(calcState, banks, inputRange);
-
+  images();
+  sliders('.slider_container');
 
 
 });

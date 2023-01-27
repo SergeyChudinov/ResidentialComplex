@@ -47,7 +47,9 @@ main {
             justify-content: space-between;
             .photo_gallery_img {
                 width: 32%;
+                height: 200px;
                 margin: 10px 0;
+                object-fit: cover;
                 transition: all 0.5s;
                 cursor: pointer;
             }
@@ -355,7 +357,36 @@ main {
             }
         }
     }
+    .slider {
+        .slider_title {
+            @include fontstyleTitle(flex, center, 50px, $title-color, 'Oswald,sans-serif', 42px);
+        }
+        div {
+            width: 100%;
+            overflow-x: hidden;
+            .slider_container {
+                display: flex;
+                width: fit-content;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                flex-direction: row;
+                gap: 34px;
+                .img_div {
+                    display: flex;
+                    border: 1px solid rgba(41, 41, 41, 0.16);
+                    width: 170px;
+                    height: 105px;
+                    img {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+    }
 }
+
+
 
 @import "footer";
 @import "modal";
