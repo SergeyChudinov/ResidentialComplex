@@ -333,21 +333,22 @@
             box-sizing: border-box;
             .modal_left_container {
                 height: 70%;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-                .modal_area_title {
-                    display: flex;
-                    justify-content: center;
-                    font-size: 25px;
-                    color: rgb(255, 255, 255);
-                    text-shadow: 1px 1px 1px #000;
-                }
+                // display: flex;
+                // flex-direction: column;
+                // justify-content: space-around;
                 section {
                     margin-top: 15px;
+                    .modal_area_title {
+                        display: flex;
+                        justify-content: center;
+                        font-size: 25px;
+                        color: rgb(255, 255, 255);
+                        text-shadow: 1px 1px 1px #000;
+                    }
                     .range_container {
                         display: flex;
                         justify-content: space-between;
+                        margin-top: 150px;
                         span {
                             color: #fff;
                         }

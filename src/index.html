@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Era</title>
+	<!-- <link rel="shortcut icon" href="../favicon.ico" type="image/iso"> -->
+	<link rel="icon" href="../House_icon-icons.com_52056.png" type="image/png">
 	<link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
@@ -51,7 +53,7 @@
 
 	<main>
 		<section class="photo_gallery container" id="photo_gallery">
-			<h1 class="photo_gallery_title">ФОТОГАЛЕРЕЯ</h1>
+			<h2 class="photo_gallery_title">ФОТОГАЛЕРЕЯ</h2>
 			<p class="photo_gallery_text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae asperiores
 				iste quibusdam at ab aperiam tempore neque illum nostrum, dolor officiis magni suscipit repellendus
 				maiores ad quam quod aut reiciendis.</p>
@@ -66,7 +68,6 @@
 				<img class="photo_gallery_img preview" src="./assets/img/photo_gallery_8.jpg" alt="photo_gallery">
 				<img class="photo_gallery_img preview" src="./assets/img/photo_gallery_9.jpg" alt="photo_gallery">
 			</div>
-
 		</section>
 
 		<div class="apartment_selection container" id="apartment_selection">
@@ -87,8 +88,6 @@
 			<div class="apartment_selection_container">
 			</div>
 		</div>
-
-
 
 		<div class="map container" id="contacts">
 			<h1 class="contacts_title">РАСПОЛОЖЕНИЕ ЖК</h1>
@@ -113,22 +112,23 @@
                         <select id='bank'></select>
                     </div> -->
 					<div class="left_container">
-						<label for="">Стоимость недвижимости</label>
+						<label>Стоимость недвижимости</label>
 						<input class="mortgage_input price" type="text" value="3000000">
 						<input class="styled-slider slider-progress real_estate_value" type="range" min="1000000" max="30000000"
 							value="2000000" id="real_estate_value">
 					</div>
 					<div class="left_container">
-						<label for="">Первоначальный взнос</label>
+						<label>Первоначальный взнос</label>
 						<input class="mortgage_input fee" type="text" value="3000000">
 						<input class="styled-slider slider-progress an_initial_fee" type="range" min="100000" max="20000000"
 							value="1000000" id="an_initial_fee">
 						<div class="attention"></div>
 					</div>
 					<div class="left_container">
-						<label for="">Срок кредита</label>
+						<label>Срок кредита</label>
 						<input class="mortgage_input term" type="text" value="3000000">
-						<input class="styled-slider slider-progress" type="range" min="1" max="30" value="10" id="credit_term">
+						<input class="styled-slider slider-progress" type="range" min="1" max="30" value="10" 
+							id="credit_term">
 					</div>
 				</div>
 				<div class="right">
@@ -357,8 +357,8 @@
 			<button type="button" class="modal_area_close"><strong>&times;</strong></button>
 			<div class="modal_left">
 				<div class="modal_left_container">
-					<h1 class="modal_area_title">Укажите желаемую площадь</h1>
 					<section class="range-slider">
+						<h2 class="modal_area_title">Укажите желаемую площадь</h2>
 						<div class="range_container">
 							<span class="rangeValues">50</span>
 							<span class="rangeValues2">100</span>
@@ -387,7 +387,7 @@
 						<div>
 							<label>
 								<input class="checkbox_finishing" type="checkbox" name="checkbox">
-								<span class="checkbox_finishing_span" id="cold"></span>
+								<span class="checkbox_finishing_span"></span>
 								<span class="label">ЧЕРНОВАЯ</span>
 							</label>
 						</div>
@@ -397,7 +397,7 @@
 						<div>
 							<label>
 								<input class="checkbox_finishing" type="checkbox" name="checkbox">
-								<span class="checkbox_finishing_span" id="cold"></span>
+								<span class="checkbox_finishing_span"></span>
 								<span class="label">ПРЕДЧИСТОВАЯ</span>
 							</label>
 						</div>
@@ -407,7 +407,7 @@
 						<div>
 							<label>
 								<input class="checkbox_finishing" type="checkbox" name="checkbox">
-								<span class="checkbox_finishing_span" id="cold"></span>
+								<span class="checkbox_finishing_span"></span>
 								<span class="label">ЧИСТОВАЯ</span>
 							</label>
 						</div>

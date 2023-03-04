@@ -23,7 +23,7 @@ const modals = () => {
             windows.forEach(item => {
                 item.style.display = 'none';
             });
-            modal.style.display = 'none';
+            modal.style.display = 'none'; // нужно ли?
             document.body.style.overflow = '';
             document.body.style.marginRight = `0px`;
         });

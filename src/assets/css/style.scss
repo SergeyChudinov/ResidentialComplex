@@ -356,33 +356,33 @@ main {
                 }
             }
         }
-    }
-    .slider {
-        .slider_title {
-            @include fontstyleTitle(flex, center, 50px, $title-color, 'Oswald,sans-serif', 32px);
-        }
-        div {
-            overflow-x: hidden;
-            .slider_container {
-                display: flex;
-                width: fit-content;
-                gap: 34px;
-                .img_div {
+        .slider {
+            .slider_title {
+                @include fontstyleTitle(flex, center, 50px, $title-color, 'Oswald,sans-serif', 32px);
+            }
+            div {
+                overflow-x: hidden;
+                .slider_container {
                     display: flex;
-                    border: 1px solid rgba(41, 41, 41, 0.16);
-                    width: 170px;
-                    height: 105px;
-                    img {
-                        padding: 5px;
-                        width: 90%;
+                    width: fit-content;
+                    gap: 33px;
+                    .img_div {
+                        display: flex;
+                        border: 1px solid rgba(41, 41, 41, 0.16);
+                        width: 170px;
+                        height: 105px;
+                        img {
+                            padding: 5px;
+                            width: 90%;
+                        }
                     }
-                }
-                .slideInRight {
-                    animation-name: slideInRight;
-                }
-                .animated {
-                    animation-duration: 0.5s;
-                    animation-fill-mode: both;
+                    .slideInRight {
+                        animation-name: slideInRight;
+                    }
+                    .animated {
+                        animation-duration: 0.5s;
+                        animation-fill-mode: both;
+                    }
                 }
             }
         }

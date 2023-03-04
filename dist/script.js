@@ -412,7 +412,8 @@ const changeModalState = (state, calcState) => {
   bindActionToElems('change', areaFrom, 'площадь от');
   bindActionToElems('change', areaTo, 'площадь до');
   bindActionToElems('change', finishing, 'вариант отделки');
-  bindActionToElems('change', bank, 'банк');
+
+  // bindActionToElems('change', bank, 'банк');
   bindActionToElems('change', realEstateValue, 'cтоимость недвижимости');
   bindActionToElems('change', anInitialFee, 'первоначальный взнос');
   bindActionToElems('change', creditTerm, 'срок кредита');
@@ -870,7 +871,7 @@ const modals = () => {
       windows.forEach(item => {
         item.style.display = 'none';
       });
-      modal.style.display = 'none';
+      modal.style.display = 'none'; // нужно ли?
       document.body.style.overflow = '';
       document.body.style.marginRight = `0px`;
     });
