@@ -63,7 +63,7 @@ const changeModalState = (state, calcState) => {
     bindActionToElems('change', areaTo, 'площадь до');
     bindActionToElems('change', finishing, 'вариант отделки');
 
-    bindActionToElems('change', bank, 'банк');
+    // bindActionToElems('change', bank, 'банк');
     bindActionToElems('change', realEstateValue, 'cтоимость недвижимости');
     bindActionToElems('change', anInitialFee, 'первоначальный взнос');
     bindActionToElems('change', creditTerm, 'срок кредита');
